@@ -1,0 +1,95 @@
+<repast.simphony.visualization.engine.CartesianDisplayDescriptor simphonyVersion="2.6.0">
+  <name>New Display</name>
+  <type>2D</type>
+  <styles>
+    <entry>
+      <string>abmsSimulation.RD</string>
+      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
+    </entry>
+    <entry>
+      <string>abmsSimulation.ST</string>
+      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
+    </entry>
+    <entry>
+      <string>abmsSimulation.PD</string>
+      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
+    </entry>
+  </styles>
+  <editedStyles>
+    <entry>
+      <string>abmsSimulation.RD</string>
+      <string>abmsSimulation.RD.style_0.xml</string>
+    </entry>
+    <entry>
+      <string>abmsSimulation.ST</string>
+      <string>abmsSimulation.ST.style_0.xml</string>
+    </entry>
+    <entry>
+      <string>abmsSimulation.PD</string>
+      <string>abmsSimulation.PD.style_1.xml</string>
+    </entry>
+  </editedStyles>
+  <netStyles>
+    <entry>
+      <string>full network</string>
+      <string>repast.simphony.visualization.editedStyle.EditedEdgeStyle2D</string>
+    </entry>
+  </netStyles>
+  <editedNetStyles>
+    <entry>
+      <string>full network</string>
+      <string>fullnetwork.style_0.xml</string>
+    </entry>
+  </editedNetStyles>
+  <frequency>ON_NEW</frequency>
+  <schedParams>
+    <start>1.0</start>
+    <interval>1.0</interval>
+    <priority>-Infinity</priority>
+    <pType>LAST</pType>
+    <duration>-1.0</duration>
+    <frequency>REPEAT</frequency>
+    <hashCode>582893389</hashCode>
+  </schedParams>
+  <layoutClassName>repast.simphony.visualization.visualization2D.Random2DLayout</layoutClassName>
+  <layoutProjection>full network</layoutProjection>
+  <layoutInterval>0</layoutInterval>
+  <layerOrder>
+    <entry>
+      <string>abmsSimulation.RD</string>
+      <int>0</int>
+    </entry>
+    <entry>
+      <string>abmsSimulation.ST</string>
+      <int>1</int>
+    </entry>
+    <entry>
+      <string>abmsSimulation.PD</string>
+      <int>2</int>
+    </entry>
+  </layerOrder>
+  <projections>
+    <repast.simphony.scenario.data.ProjectionData>
+      <id>full network</id>
+      <attributes/>
+      <type>network</type>
+    </repast.simphony.scenario.data.ProjectionData>
+  </projections>
+  <projectionDescriptors>
+    <entry>
+      <string>full network</string>
+      <repast.simphony.visualization.engine.DefaultProjectionDescriptor>
+        <proj reference="../../../../projections/repast.simphony.scenario.data.ProjectionData"/>
+        <props/>
+      </repast.simphony.visualization.engine.DefaultProjectionDescriptor>
+    </entry>
+  </projectionDescriptors>
+  <props/>
+  <backgroundColor>
+    <red>255</red>
+    <green>255</green>
+    <blue>255</blue>
+    <alpha>255</alpha>
+  </backgroundColor>
+  <valueLayers/>
+</repast.simphony.visualization.engine.CartesianDisplayDescriptor>

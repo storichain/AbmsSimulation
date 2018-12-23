@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<parameters>
+	<parameter name="randomSeed" displayName="Default Random Seed" type="int" defaultValue="__NULL__" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"/>
+	<parameter name="marketSplit" displayName="Market split (%)" type="int" 
+						defaultValue="30" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter" />
+	<parameter name="numberOfPD" displayName="Number of PD" type="int" 
+						defaultValue="10" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter" />
+	<parameter name="numberOfRD" displayName="Number of RD" type="int" 
+						defaultValue="10" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter" />
+	<parameter name="numberOfST" displayName="Number of ST" type="int" 
+						defaultValue="10" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter" />
+	<parameter name="adaptationSpeed" displayName="Adaptation speed  (1-5)" type="int" 
+						defaultValue="1" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter" />
+	<parameter name="randomNetworkDensity" displayName="Random network density" type="double" 
+						defaultValue="0.3" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter" />
+	<parameter name="networkGenerator" displayName="Network generator" type="java.lang.String" 
+						defaultValue="BarabasiAlbert" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$StringStringConverter"
+						values="BarabasiAlbert ZombieNetwork RandomNetwork" />
+	<parameter name="vectorSpaceSize" displayName="Vector space size" type="int" 
+						defaultValue="5" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter" />
+	<parameter name="maxDepthForMeeting" displayName="Max depth for meetings" type="int" 
+						defaultValue="3" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter" />
+	<parameter name="minAvailableMoney" displayName="Min available money (thousands EUR)" type="double" 
+						defaultValue="1.0" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter" />			
+	<parameter name="productElementChangeThreshold" displayName="Product element change threshold (%)" type="int" 
+						defaultValue="40" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter" />
+	<parameter name="newConnectionsProbability" displayName="New connections probability" type="double" 
+						defaultValue="0.5" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter" />
+	<parameter name="utilityFunction" displayName="Utility function" type="java.lang.String" 
+						defaultValue="None" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$StringStringConverter"
+						values="None ConnectionsUtility DegreeCentrality BetweennessCentrality" />
+	<parameter name="edgeProbability" displayName="Network generator edge probability" type="double" 
+						defaultValue="0.3" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter" />
+    <parameter name="affordableLoss" displayName="Affordable loss (%)" type="int" 
+						defaultValue="50" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter" />		
+	<parameter name="meanDegree" displayName="Small-world mean degree (even)" type="int" 
+						defaultValue="4" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter" />
+	<parameter name="maxAvailableMoney" displayName="Max available money (thousands EUR)" type="double" 
+						defaultValue="10.0" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter" />				
+	<parameter name="customersPersuadability" displayName="Customers persuadability prob (%)" type="int" 
+						defaultValue="30" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter" />
+	<parameter name="edgesPerStep" displayName="Network generator edges per step" type="int" 
+						defaultValue="3" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter" />
+</parameters>
