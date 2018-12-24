@@ -24,7 +24,7 @@ public class BarabasiAlbertNetworkGenerator extends MainNetworkGenerator impleme
 		initializeNetwork(getEdgeProbability());	
 
 		// Evolve network using preferential attachment
-		evolveNetwork();
+		InitEvolveNetwork();
 
 		return network;
 	}
@@ -34,7 +34,9 @@ public class BarabasiAlbertNetworkGenerator extends MainNetworkGenerator impleme
 	 * @param n Node to be attached
 	 */
 	public void attachNode(Object n) {
-		//System.out.println("attachNode() in Barabasi");
+		System.out.println("attachNode() in Barabasi");
+		
+		System.out.println("check Object in attachNode : " + n.getClass());
 		
 		context.add(n);
 		//When checking the network degree, look only at the "entreprenurial network",
@@ -47,7 +49,13 @@ public class BarabasiAlbertNetworkGenerator extends MainNetworkGenerator impleme
 			
 			while (!attached) {
 				
-				Object o = context.getRandomObject();
+				Object o = null;
+				do {
+					o = context.getRandomObject();
+//					if(o instanceof TempSchedule)
+//						System.out.println("check instanceof -------------------------");
+					
+				} while(o instanceof TempSchedule);
 				
 				double prob = (network.getDegree(o) + 1) / (totalDegree + network.size());
 				

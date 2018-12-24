@@ -2,25 +2,27 @@ package abmsSimulation;
 
 import java.util.HashMap;
 
-import EffectuationCausation.SimulationBuilder;
+
 import repast.simphony.context.Context;
 import repast.simphony.engine.schedule.ScheduledMethod;
 import repast.simphony.random.RandomHelper;
 import repast.simphony.space.graph.Network;
 
 
-
 public class PD extends Agent {
 	
 	protected int[] demandVector;		// PD's Demand. when demand matches with ProductDemand on Story, PD does invest.
 	
-	protected boolean isOperating;	    // for checking staking on one time per a story
+	protected boolean isOperating;	    // for checking staking on one time per an activity
+	public double availableMoney;
 
 	public PD(Context<Object> context, Network<Object> network, String label) {
 		super(context, network, label);
 		demandVector = new int[Parameters.vectorSpaceSize];
 		initializeDemandVector();
+		initializeAvailableMoney();
 		isOperating = false;
+		availableMoney = 0;
 	}
 	
 	/**
@@ -33,6 +35,10 @@ public class PD extends Agent {
 			
 			demandVector[i] = r < marketSplit ? 1 : 0;
 		}
+	}
+	
+	public void initializeAvailableMoney() {
+		availableMoney = RandomHelper.nextDoubleFromTo(0, 100);
 	}
 	
 	public boolean isOperating() {
@@ -91,14 +97,14 @@ public class PD extends Agent {
 			}
 		}
 	}
-	
+/*	
 	// demand comparison
 	//public void processOffer(int[] productVector) {
 	public void processDemandComparison(int[] productVector) {
 
 		setNegotiating(true);
 		
-		int d = ContextBuilder.hammingDistance(demandVector, productVector);
+		int d = SimulBuilder.hammingDistance(demandVector, productVector);
 		
 		double r = RandomHelper.nextDoubleFromTo(0, 1);
 		
@@ -108,21 +114,26 @@ public class PD extends Agent {
 		
 		setNegotiating(false);
 	}
+*/	
 	
-	/**
-	 * Offers the product to customers
-	 */
-	@ScheduledMethod(start=1,priority=2,interval=3)
+	//@ScheduledMethod(start=5,priority=4,interval=7)
 	public void doProducing() {
+		System.out.println("doProducing");
+		//setNegotiating(!isNegotiating());
+		//System.out.println("Nego : " + isNegotiating());
+		
 		if (!isOperating()) {
 			Story c;
 			
 			c = (Story) meet(Story.class);
 			
-			if (c!=null && c instanceof Story) {			
+			if (c!=null && c instanceof Story) {
 				//c.processOffer(goal.getProductVector());
 				// 여기서 투자를 할지 말지 체크하는 기능 넣기  12월23일 24:00
+				double chkAvailableMoney = c.processStaking(demandVector, (availableMoney * 0.1));
+				availableMoney -= chkAvailableMoney;
 			}
 		}
 	}
+	
 }

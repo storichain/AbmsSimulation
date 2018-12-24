@@ -108,18 +108,18 @@ public abstract class MainNetworkGenerator implements NetworkGenerator<Object> {
 		
 		for (int i = 0; i < 10 && i < totalPD; i++) {
 
-			PD p1 = new PD(context, network, ContextBuilder.nextId("P"));
+			PD p1 = new PD(context, network, SimulBuilder.nextId("P"));
 			context.add(p1);
-			ContextBuilder.pdList.add(p1);
+			SimulBuilder.pdList.add(p1);
 			totalPD--;
 		}
 		//randomWire(pp);
 		
 		for (int i = 0; i < 10 && i < totalST; i++) {
 
-			ST p1 = new ST(context, network, ContextBuilder.nextId("S"));
+			ST p1 = new ST(context, network, SimulBuilder.nextId("S"));
 			context.add(p1);
-			ContextBuilder.stList.add(p1);
+			SimulBuilder.stList.add(p1);
 			totalST--;
 		}
 		
@@ -140,8 +140,12 @@ public abstract class MainNetworkGenerator implements NetworkGenerator<Object> {
 	}
 	
 
-
-	public void evolveNetwork() {
+	
+	public void InitEvolveNetwork() {
+		System.out.println("InitEvolveNetwork()");
+		System.out.println("totlaST : " + totalST);
+		System.out.println("totalPD : " + totalPD);
+		
 		while (totalST > 0 || totalPD > 0) {
 			
 			double random = RandomHelper.nextDoubleFromTo(0, 1);
@@ -152,45 +156,45 @@ public abstract class MainNetworkGenerator implements NetworkGenerator<Object> {
 				ST e = null;
 				 * int type = RandomHelper.nextIntFromTo(1, 2);
 				
-				if (type == 1 && ContextBuilder.currentST != null && !context.contains(ContextBuilder.currentST)) {
-					e = ContextBuilder.currentST;
+				if (type == 1 && SimulBuilder.currentST != null && !context.contains(SimulBuilder.currentST)) {
+					e = SimulBuilder.currentST;
 				} else {
-					e = new ST(context, network, ContextBuilder.nextId("S"));
+					e = new ST(context, network, SimulBuilder.nextId("S"));
 					//e.generateGoal();
 				}
 				*/
-				ST c = new ST(context, network, ContextBuilder.nextId("S"));
-				attachNode(c);
-				ContextBuilder.stList.add(c);
+				ST c = new ST(context, network, SimulBuilder.nextId("S"));
+			
+				SimulBuilder.stList.add(c);
 				attachNode(c);
 				totalST--;
 			} else if (totalPD > 0) {        //  여기서 부터 작업 12월 17일 effectuator  방식으로 처
-				PD c = new PD(context, network, ContextBuilder.nextId("P"));
+				PD c = new PD(context, network, SimulBuilder.nextId("P"));
 				attachNode(c);
-				ContextBuilder.pdList.add(c);
+				SimulBuilder.pdList.add(c);
 				totalPD--;
 			}
 		}
 	/*
 		//Assure the presence of the effectuator and/or causator
-		if (ContextBuilder.currentST != null && !context.contains(ContextBuilder.currentST)) {
+		if (SimulBuilder.currentST != null && !context.contains(SimulBuilder.currentST)) {
 			Agent e = null;
 			do {
 				e = (ST)context.getRandomObjects(ST.class, 1).iterator().next();
 				//System.out.println("xxxxxxxxxxxxxxx");
 			} while (e instanceof RD || e instanceof PD);
 			context.remove(e);
-			attachNode(ContextBuilder.currentST);
+			attachNode(SimulBuilder.currentST);
 		}
 		
-		if (ContextBuilder.currentPD != null && !context.contains(ContextBuilder.currentPD)) {
+		if (SimulBuilder.currentPD != null && !context.contains(SimulBuilder.currentPD)) {
 			Agent e = null;
 			do {
 				e = (PD)context.getRandomObjects(PD.class, 1).iterator().next();
 				//System.out.println("yyyyyyyyyyyyy");
 			} while (e instanceof ST || e instanceof RD);
 			context.remove(e);
-			attachNode(ContextBuilder.currentPD);
+			attachNode(SimulBuilder.currentPD);
 		}
 		*/
 	}

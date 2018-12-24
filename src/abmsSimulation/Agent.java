@@ -143,7 +143,7 @@ public class Agent implements Comparable<Object> {
 	}
 	
 	/**
-	 * Meet an entity of an specified type (entrepreneur or customer)
+	 * Meet an entity of an specified type (all agents such as PD, ST, RD, Story)
 	 * @param Class<?> Entity type 
 	 * @return Object An acquaintance
 	 */
@@ -163,9 +163,9 @@ public class Agent implements Comparable<Object> {
 		}
 		
 		if (acquaintance == this) {
-			acquaintance = null;			
-		} 
+			acquaintance = null;
+		}
 		
-		return acquaintance;		
+		return acquaintance;
 	}
 }

@@ -3,10 +3,6 @@
   <type>2D</type>
   <styles>
     <entry>
-      <string>abmsSimulation.RD</string>
-      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
-    </entry>
-    <entry>
       <string>abmsSimulation.ST</string>
       <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
@@ -14,12 +10,12 @@
       <string>abmsSimulation.PD</string>
       <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
+    <entry>
+      <string>abmsSimulation.Story</string>
+      <string>repast.simphony.visualizationOGL2D.DefaultStyleOGL2D</string>
+    </entry>
   </styles>
   <editedStyles>
-    <entry>
-      <string>abmsSimulation.RD</string>
-      <string>abmsSimulation.RD.style_0.xml</string>
-    </entry>
     <entry>
       <string>abmsSimulation.ST</string>
       <string>abmsSimulation.ST.style_0.xml</string>
@@ -27,6 +23,10 @@
     <entry>
       <string>abmsSimulation.PD</string>
       <string>abmsSimulation.PD.style_1.xml</string>
+    </entry>
+    <entry>
+      <string>abmsSimulation.Story</string>
+      <null/>
     </entry>
   </editedStyles>
   <netStyles>
@@ -49,16 +49,12 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>582893389</hashCode>
+    <hashCode>1506221147</hashCode>
   </schedParams>
   <layoutClassName>repast.simphony.visualization.visualization2D.Random2DLayout</layoutClassName>
   <layoutProjection>full network</layoutProjection>
   <layoutInterval>0</layoutInterval>
   <layerOrder>
-    <entry>
-      <string>abmsSimulation.RD</string>
-      <int>0</int>
-    </entry>
     <entry>
       <string>abmsSimulation.ST</string>
       <int>1</int>
@@ -66,6 +62,10 @@
     <entry>
       <string>abmsSimulation.PD</string>
       <int>2</int>
+    </entry>
+    <entry>
+      <string>abmsSimulation.Story</string>
+      <int>0</int>
     </entry>
   </layerOrder>
   <projections>

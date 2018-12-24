@@ -14,34 +14,41 @@ import repast.simphony.context.space.graph.NetworkBuilder;
 import repast.simphony.engine.schedule.ISchedule;
 import repast.simphony.engine.schedule.ScheduleParameters;
 import repast.simphony.engine.schedule.ScheduledMethod;
+import repast.simphony.engine.watcher.Watch;
+import repast.simphony.engine.watcher.WatcherTriggerSchedule;
 import repast.simphony.random.RandomHelper;
 import repast.simphony.space.graph.EdgeCreator;
 import repast.simphony.space.graph.Network;
 import repast.simphony.space.graph.RepastEdge;
+import repast.simphony.dataLoader.ContextBuilder;
 
 
-public class ContextBuilder extends DefaultContext<Object> implements repast.simphony.dataLoader.ContextBuilder<Object> {
+
+public class SimulBuilder extends DefaultContext<Object> implements ContextBuilder<Object> {
+
 
 		public static Context<Object> context;
 		public static Network<Object> network;
 		//public static Network<Object> effectuationNetwork;	
-		private static MainNetworkGenerator networkGenerator;
+		public static MainNetworkGenerator networkGenerator;
 		//public static boolean allEntrepreneursOffering;   // to check to stop simulation
 		public static ArrayList<ST> stList;
 		public static ArrayList<RD> rdList;
 		public static ArrayList<PD> pdList;
 		
-		public static ST currentST;
+//		public static ST currentST;
 		//public static EffectuatorRD effectuatorRD;
-		public static PD currentPD;
+//		public static PD currentPD;
 		
 		private static HashMap<String, Integer> lastIds;
 		//public static int staticDemandSteps;
 		//public static double[]  productElementCost;   //이상적 상품(스토리)의 cost
+		
+		public TempSchedule randomEvolve;
 
 		
 		@Override
-		public Context build(Context<Object> context) {
+		public Context<Object> build(Context<Object> context) {
 			Parameters.initialize();
 			
 			stList= new ArrayList<ST>();
@@ -56,18 +63,10 @@ public class ContextBuilder extends DefaultContext<Object> implements repast.sim
 				
 			context.setId("AbmsSimulation");
 			
-			ContextBuilder.context = context;
-			
-			//currentST = new ST(context, network, "StoryTeller");
-			//currentPD = new PD(context, network, "Produser");
-			
+			SimulBuilder.context = context;
 			
 			buildNetworks();
 			
-		//	effectuatorST = new EffectuatorST(context, network, "StoryTeller");
-		//	effectuatorRD = new EffectuatorRD(context, network, "Reader");
-		//	effectuatorPD = new EffectuatorPD(context, network, "Producer");
-
 			
 			//Network generation
 			if (Parameters.networkGenerator.equals("BarabasiAlbert")) {
@@ -80,7 +79,7 @@ public class ContextBuilder extends DefaultContext<Object> implements repast.sim
 			
 			networkGenerator.setTotalST(Parameters.numberOfST);
 			networkGenerator.setTotalPD(Parameters.numberOfPD);
-			networkGenerator.setTotalRD(Parameters.numberOfRD);
+			//networkGenerator.setTotalRD(Parameters.numberOfRD);
 			networkGenerator.seEdgesPerStep(Parameters.edgesPerStep);
 			networkGenerator.setEdgeProbability(Parameters.edgeProbability);
 			
@@ -95,9 +94,19 @@ public class ContextBuilder extends DefaultContext<Object> implements repast.sim
 			
 			scheduleActions();
 			
+			//new TempSchedule(this);
+			
+			context.add(randomEvolve = new TempSchedule(this));
+			
 			return context;
 		}
+		
+		
+		
 	
+		public static MainNetworkGenerator getNetworkGenerator() {
+			return networkGenerator;
+		}
 		
 		/**
 		 * Recursively get all customer acquaintances of a node using a specified network depth.
@@ -105,13 +114,13 @@ public class ContextBuilder extends DefaultContext<Object> implements repast.sim
 		 * @param depth
 		 * @param List of customers acquaintances
 		 */
-		public static void getPDAcquiantances(Object n, int depth, List<PD> customers) {		
+		public static void getPDAcquiantances(Object n, int depth, List<PD> pdList) {		
 			for (Object o: network.getAdjacent(n)) {
 				if (o instanceof PD) {
-					customers.add((PD)o);
+					pdList.add((PD)o);
 				}
 				if (depth > 1) {
-					getPDAcquiantances(o, depth-1, customers);
+					getPDAcquiantances(o, depth-1, pdList);
 				}
 			}
 		}
@@ -164,7 +173,7 @@ public class ContextBuilder extends DefaultContext<Object> implements repast.sim
 		 * Calculates the betweenness centrality for each node, using the JUNG implemented
 		 * betweenness centrality calculator algorithm 
 		 */	
-		public void calculateBetweennesCentralities() {			
+		public static void calculateBetweennesCentralities() {			
 			
 			ContextJungNetwork<Object> N = (ContextJungNetwork<Object>)network;
 			
@@ -176,6 +185,10 @@ public class ContextBuilder extends DefaultContext<Object> implements repast.sim
 			ranker.evaluate();
 			
 			for (Object n: network.getNodes()) {
+				//System.out.println("check Object n : " + n.getClass());
+				if(n instanceof TempSchedule)
+					continue;
+				
 				Agent a = (Agent)n;
 				// Normalize by (n-1)(n-2)/2
 				a.setBetweennessCentrality(ranker.getVertexRankScore(n) / (((N.size()-1) * (N.size()-2)) / 2.0) );
@@ -210,22 +223,7 @@ public class ContextBuilder extends DefaultContext<Object> implements repast.sim
 			return prefix + String.valueOf(nextId);
 		}
 
-		public void scheduleActions() {
-			ISchedule schedule = repast.simphony.engine.environment.RunEnvironment.getInstance().getCurrentSchedule();
-			
-			//Schedule adaptProductVector for each ST
-			//ArrayList<ST> st = new ArrayList<ST>();
-			ArrayList<PD> pd = new ArrayList<PD>();
-			//ArrayList<RD> rd = new ArrayList<RD>();
-			
-			for (Object c: context.getObjects(PD.class)) {
-				pd.add((PD)c);
-			}
-			
-			ScheduleParameters parameters = ScheduleParameters.createRepeating(1, 6 - Parameters.adaptationSpeed, 1);		
-			
-			schedule.scheduleIterable(parameters, pd, "adaptProductVector", true);
-		}
+		
 		
 		/**
 		 * Randomly generate product element costs
@@ -285,44 +283,10 @@ public class ContextBuilder extends DefaultContext<Object> implements repast.sim
 		/**
 		 *  Evolves network (if set) during the simulation (adding new nodes randomly)
 		 */
-		@ScheduledMethod(start=1,interval=2)
-		public void evolveNetwork() {
-			System.out.println("ContextBuilder evolveNetwork");
-			
-			double r = RandomHelper.nextDoubleFromTo(0, 1);
-			
-			if (r < Parameters.newConnectionsProbability) {
-				int random = RandomHelper.nextIntFromTo(1, 3);
-				
-				Object attached;
-				
-				switch (random) {
-					default:
-						PD c = new PD(context, network, nextId("P"));
-						networkGenerator.attachNode(c);
-						attached = c;
-						break;
-//					case 1:
-//						RD rd = new RD(context, network, nextId("R"));
-//						networkGenerator.attachNode(rd);		
-//						attached = rd;
-//						break;
-					case 2:
-						ST e = new ST(context, network, nextId("S"));
-				//		e.generateGoal();
-						networkGenerator.attachNode(e);					
-						attached = e;				
-						break;
-				}
-				
-				for (RepastEdge<Object> edge: network.getEdges(attached)) {
-					((CustomNetworkEdge) edge).setThickness(2.0); 
-					((CustomNetworkEdge) edge).setColor(Color.red);
-				}
-				
-				calculateBetweennesCentralities();
-			}
-		}
+		//@ScheduledMethod(start=10,interval=10,priority=10)
+		//@Watch(watcheeClassName="abmsSimulation.Agent",
+		//		watcheeFieldNames="negotiating",whenToTrigger=WatcherTriggerSchedule.IMMEDIATE)
+		
 		
 		/**
 		 * Checks if all entrepreneurs are offering and update the relevant flag
@@ -340,4 +304,26 @@ public class ContextBuilder extends DefaultContext<Object> implements repast.sim
 		}
 		*/
 		
+		public void scheduleActions() {
+			ISchedule schedule = repast.simphony.engine.environment.RunEnvironment.getInstance().getCurrentSchedule();
+			
+			ArrayList<PD> pd = new ArrayList<PD>();
+			for (Object c: context.getObjects(PD.class)) {
+				pd.add((PD)c);
+			}
+															// createRepeating(start,interval,priority)
+			//ScheduleParameters parameters = ScheduleParameters.createRepeating(1, 6 - Parameters.adaptationSpeed, 1);		
+			//schedule.scheduleIterable(parameters, pd, "adaptProductVector", true);
+			ScheduleParameters parameters = ScheduleParameters.createRepeating(2, Parameters.adaptationSpeed, 5);
+			schedule.scheduleIterable(parameters, pd, "doProducing", true);
+			
+			ArrayList<ST> st = new ArrayList<ST>();
+			for (Object c: context.getObjects(ST.class)) {
+				st.add((ST)c);
+			}
+													
+			parameters = ScheduleParameters.createRepeating(1, Parameters.adaptationSpeed, 3);
+			schedule.scheduleIterable(parameters, st, "doWriting", true);
+			
+			}
 }
