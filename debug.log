@@ -659,3 +659,259 @@ Caused by: java.lang.ClassCastException: abmsSimulation.TempSchedule cannot be c
 	at abmsSimulation.SimulBuilder.calculateBetweennesCentralities(SimulBuilder.java:189)
 	at abmsSimulation.TempSchedule.myEvolveNetwork(TempSchedule.java:54)
 	... 10 more
+FATAL [Thread-6] 2018-12-24 21:53:37,604 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (10.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at abmsSimulation.TempSchedule$$FastClassByCGLIB$$8f1dbdab.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.ClassCastException: repast.simphony.context.space.graph.ContextJungNetwork cannot be cast to abmsSimulation.MainNetworkGenerator
+	at abmsSimulation.TempSchedule.myEvolveNetwork(TempSchedule.java:34)
+	... 10 more
+FATAL [Thread-6] 2018-12-24 22:16:08,604 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (14.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at abmsSimulation.TempSchedule$$FastClassByCGLIB$$8f1dbdab.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.NullPointerException
+	at abmsSimulation.TempSchedule.myEvolveNetwork(TempSchedule.java:59)
+	... 10 more
+FATAL [Thread-6] 2018-12-24 22:24:31,299 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (18.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at abmsSimulation.TempSchedule$$FastClassByCGLIB$$8f1dbdab.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.IllegalMonitorStateException
+	at java.lang.Object.notifyAll(Native Method)
+	at abmsSimulation.TempSchedule.myEvolveNetwork(TempSchedule.java:68)
+	... 10 more
+ERROR [AWT-EventQueue-0] 2018-12-26 15:28:36,979 repast.simphony.ui.RSApplication - Scenario Load Error
+repast.simphony.scenario.ScenarioLoadException: ParseError at [row,col]:[1,1]
+Message: 예기치 않은 파일의 끝입니다.
+	at repast.simphony.scenario.ScenarioLoader.load(ScenarioLoader.java:220)
+	at repast.simphony.ui.RSApplication.open(RSApplication.java:359)
+	at repast.simphony.ui.RSAppConfigurator.postWindowOpen(RSAppConfigurator.java:39)
+	at saf.core.ui.GUICreatorDelegate.runDisplay(GUICreatorDelegate.java:216)
+	at saf.core.ui.GUICreator$1.run(GUICreator.java:18)
+	at simphony.util.ThreadUtilities$Runner.run(ThreadUtilities.java:33)
+	at simphony.util.ThreadUtilities.runInEventThread(ThreadUtilities.java:47)
+	at saf.core.ui.GUICreator.runDisplay(GUICreator.java:16)
+	at repast.simphony.ui.RSUIPlugin$1.run(RSUIPlugin.java:101)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:749)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:702)
+	at java.awt.EventQueue$3.run(EventQueue.java:696)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:75)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:719)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+Caused by: javax.xml.stream.XMLStreamException: ParseError at [row,col]:[1,1]
+Message: 예기치 않은 파일의 끝입니다.
+	at com.sun.org.apache.xerces.internal.impl.XMLStreamReaderImpl.next(XMLStreamReaderImpl.java:601)
+	at com.sun.xml.internal.stream.XMLEventReaderImpl.nextEvent(XMLEventReaderImpl.java:83)
+	at repast.simphony.scenario.data.ContextFileReader.read(ContextFileReader.java:40)
+	at repast.simphony.scenario.ScenarioLoader.load(ScenarioLoader.java:126)
+	... 22 more
+ERROR [AWT-EventQueue-0] 2018-12-26 15:32:04,014 repast.simphony.ui.RSApplication - Scenario Load Error
+repast.simphony.scenario.ScenarioLoadException: ParseError at [row,col]:[1,1]
+Message: 예기치 않은 파일의 끝입니다.
+	at repast.simphony.scenario.ScenarioLoader.load(ScenarioLoader.java:220)
+	at repast.simphony.ui.RSApplication.open(RSApplication.java:359)
+	at repast.simphony.ui.RSAppConfigurator.postWindowOpen(RSAppConfigurator.java:39)
+	at saf.core.ui.GUICreatorDelegate.runDisplay(GUICreatorDelegate.java:216)
+	at saf.core.ui.GUICreator$1.run(GUICreator.java:18)
+	at simphony.util.ThreadUtilities$Runner.run(ThreadUtilities.java:33)
+	at simphony.util.ThreadUtilities.runInEventThread(ThreadUtilities.java:47)
+	at saf.core.ui.GUICreator.runDisplay(GUICreator.java:16)
+	at repast.simphony.ui.RSUIPlugin$1.run(RSUIPlugin.java:101)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:749)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:702)
+	at java.awt.EventQueue$3.run(EventQueue.java:696)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:75)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:719)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+Caused by: javax.xml.stream.XMLStreamException: ParseError at [row,col]:[1,1]
+Message: 예기치 않은 파일의 끝입니다.
+	at com.sun.org.apache.xerces.internal.impl.XMLStreamReaderImpl.next(XMLStreamReaderImpl.java:601)
+	at com.sun.xml.internal.stream.XMLEventReaderImpl.nextEvent(XMLEventReaderImpl.java:83)
+	at repast.simphony.scenario.data.ContextFileReader.read(ContextFileReader.java:40)
+	at repast.simphony.scenario.ScenarioLoader.load(ScenarioLoader.java:126)
+	... 22 more
+ERROR [AWT-EventQueue-0] 2018-12-26 15:32:30,800 repast.simphony.ui.RSApplication - Scenario Load Error
+repast.simphony.scenario.ScenarioLoadException: ParseError at [row,col]:[1,1]
+Message: 예기치 않은 파일의 끝입니다.
+	at repast.simphony.scenario.ScenarioLoader.load(ScenarioLoader.java:220)
+	at repast.simphony.ui.RSApplication.open(RSApplication.java:359)
+	at repast.simphony.ui.RSAppConfigurator.postWindowOpen(RSAppConfigurator.java:39)
+	at saf.core.ui.GUICreatorDelegate.runDisplay(GUICreatorDelegate.java:216)
+	at saf.core.ui.GUICreator$1.run(GUICreator.java:18)
+	at simphony.util.ThreadUtilities$Runner.run(ThreadUtilities.java:33)
+	at simphony.util.ThreadUtilities.runInEventThread(ThreadUtilities.java:47)
+	at saf.core.ui.GUICreator.runDisplay(GUICreator.java:16)
+	at repast.simphony.ui.RSUIPlugin$1.run(RSUIPlugin.java:101)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:749)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:702)
+	at java.awt.EventQueue$3.run(EventQueue.java:696)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:75)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:719)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+Caused by: javax.xml.stream.XMLStreamException: ParseError at [row,col]:[1,1]
+Message: 예기치 않은 파일의 끝입니다.
+	at com.sun.org.apache.xerces.internal.impl.XMLStreamReaderImpl.next(XMLStreamReaderImpl.java:601)
+	at com.sun.xml.internal.stream.XMLEventReaderImpl.nextEvent(XMLEventReaderImpl.java:83)
+	at repast.simphony.scenario.data.ContextFileReader.read(ContextFileReader.java:40)
+	at repast.simphony.scenario.ScenarioLoader.load(ScenarioLoader.java:126)
+	... 22 more
+ERROR [AWT-EventQueue-0] 2018-12-26 15:33:45,913 repast.simphony.ui.RSApplication - Scenario Load Error
+repast.simphony.scenario.ScenarioLoadException: ParseError at [row,col]:[1,1]
+Message: 예기치 않은 파일의 끝입니다.
+	at repast.simphony.scenario.ScenarioLoader.load(ScenarioLoader.java:220)
+	at repast.simphony.ui.RSApplication.open(RSApplication.java:359)
+	at repast.simphony.ui.RSAppConfigurator.postWindowOpen(RSAppConfigurator.java:39)
+	at saf.core.ui.GUICreatorDelegate.runDisplay(GUICreatorDelegate.java:216)
+	at saf.core.ui.GUICreator$1.run(GUICreator.java:18)
+	at simphony.util.ThreadUtilities$Runner.run(ThreadUtilities.java:33)
+	at simphony.util.ThreadUtilities.runInEventThread(ThreadUtilities.java:47)
+	at saf.core.ui.GUICreator.runDisplay(GUICreator.java:16)
+	at repast.simphony.ui.RSUIPlugin$1.run(RSUIPlugin.java:101)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:749)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:702)
+	at java.awt.EventQueue$3.run(EventQueue.java:696)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:75)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:719)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+Caused by: javax.xml.stream.XMLStreamException: ParseError at [row,col]:[1,1]
+Message: 예기치 않은 파일의 끝입니다.
+	at com.sun.org.apache.xerces.internal.impl.XMLStreamReaderImpl.next(XMLStreamReaderImpl.java:601)
+	at com.sun.xml.internal.stream.XMLEventReaderImpl.nextEvent(XMLEventReaderImpl.java:83)
+	at repast.simphony.scenario.data.ContextFileReader.read(ContextFileReader.java:40)
+	at repast.simphony.scenario.ScenarioLoader.load(ScenarioLoader.java:126)
+	... 22 more
+ERROR [AWT-EventQueue-0] 2018-12-26 15:36:21,485 repast.simphony.ui.RSApplication - Scenario Load Error
+repast.simphony.scenario.ScenarioLoadException: ParseError at [row,col]:[1,1]
+Message: 예기치 않은 파일의 끝입니다.
+	at repast.simphony.scenario.ScenarioLoader.load(ScenarioLoader.java:220)
+	at repast.simphony.ui.RSApplication.open(RSApplication.java:359)
+	at repast.simphony.ui.RSAppConfigurator.postWindowOpen(RSAppConfigurator.java:39)
+	at saf.core.ui.GUICreatorDelegate.runDisplay(GUICreatorDelegate.java:216)
+	at saf.core.ui.GUICreator$1.run(GUICreator.java:18)
+	at simphony.util.ThreadUtilities$Runner.run(ThreadUtilities.java:33)
+	at simphony.util.ThreadUtilities.runInEventThread(ThreadUtilities.java:47)
+	at saf.core.ui.GUICreator.runDisplay(GUICreator.java:16)
+	at repast.simphony.ui.RSUIPlugin$1.run(RSUIPlugin.java:101)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:749)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:702)
+	at java.awt.EventQueue$3.run(EventQueue.java:696)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:75)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:719)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+Caused by: javax.xml.stream.XMLStreamException: ParseError at [row,col]:[1,1]
+Message: 예기치 않은 파일의 끝입니다.
+	at com.sun.org.apache.xerces.internal.impl.XMLStreamReaderImpl.next(XMLStreamReaderImpl.java:601)
+	at com.sun.xml.internal.stream.XMLEventReaderImpl.nextEvent(XMLEventReaderImpl.java:83)
+	at repast.simphony.scenario.data.ContextFileReader.read(ContextFileReader.java:40)
+	at repast.simphony.scenario.ScenarioLoader.load(ScenarioLoader.java:126)
+	... 22 more
+ERROR [AWT-EventQueue-0] 2018-12-26 15:56:14,809 repast.simphony.ui.RSApplication - Scenario Load Error
+repast.simphony.scenario.ScenarioLoadException: ParseError at [row,col]:[1,1]
+Message: 예기치 않은 파일의 끝입니다.
+	at repast.simphony.scenario.ScenarioLoader.load(ScenarioLoader.java:220)
+	at repast.simphony.ui.RSApplication.open(RSApplication.java:359)
+	at repast.simphony.ui.RSAppConfigurator.postWindowOpen(RSAppConfigurator.java:39)
+	at saf.core.ui.GUICreatorDelegate.runDisplay(GUICreatorDelegate.java:216)
+	at saf.core.ui.GUICreator$1.run(GUICreator.java:18)
+	at simphony.util.ThreadUtilities$Runner.run(ThreadUtilities.java:33)
+	at simphony.util.ThreadUtilities.runInEventThread(ThreadUtilities.java:47)
+	at saf.core.ui.GUICreator.runDisplay(GUICreator.java:16)
+	at repast.simphony.ui.RSUIPlugin$1.run(RSUIPlugin.java:101)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:749)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:702)
+	at java.awt.EventQueue$3.run(EventQueue.java:696)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:75)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:719)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+Caused by: javax.xml.stream.XMLStreamException: ParseError at [row,col]:[1,1]
+Message: 예기치 않은 파일의 끝입니다.
+	at com.sun.org.apache.xerces.internal.impl.XMLStreamReaderImpl.next(XMLStreamReaderImpl.java:601)
+	at com.sun.xml.internal.stream.XMLEventReaderImpl.nextEvent(XMLEventReaderImpl.java:83)
+	at repast.simphony.scenario.data.ContextFileReader.read(ContextFileReader.java:40)
+	at repast.simphony.scenario.ScenarioLoader.load(ScenarioLoader.java:126)
+	... 22 more

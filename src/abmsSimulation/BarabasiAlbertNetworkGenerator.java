@@ -34,9 +34,9 @@ public class BarabasiAlbertNetworkGenerator extends MainNetworkGenerator impleme
 	 * @param n Node to be attached
 	 */
 	public void attachNode(Object n) {
-		System.out.println("attachNode() in Barabasi");
+//		System.out.println("attachNode() in Barabasi");
 		
-		System.out.println("check Object in attachNode : " + n.getClass());
+//		System.out.println("check Object in attachNode : " + n.getClass());
 		
 		context.add(n);
 		//When checking the network degree, look only at the "entreprenurial network",
