@@ -59,7 +59,9 @@ public class CustomNetworkEdge extends RepastEdge<Object> {
 		this.color = color;
 	}
 	
+	
 	public double getRed() {
+		//return Color.RED;
 		return color.getRed() / 255;
 	}
 	

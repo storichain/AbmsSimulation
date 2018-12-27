@@ -3,30 +3,38 @@
   <type>2D</type>
   <styles>
     <entry>
+      <string>abmsSimulation.RD</string>
+      <string>repast.simphony.visualizationOGL2D.DefaultStyleOGL2D</string>
+    </entry>
+    <entry>
       <string>abmsSimulation.ST</string>
+      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
+    </entry>
+    <entry>
+      <string>abmsSimulation.Story</string>
       <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
     <entry>
       <string>abmsSimulation.PD</string>
       <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
-    <entry>
-      <string>abmsSimulation.Story</string>
-      <string>repast.simphony.visualizationOGL2D.DefaultStyleOGL2D</string>
-    </entry>
   </styles>
   <editedStyles>
+    <entry>
+      <string>abmsSimulation.RD</string>
+      <null/>
+    </entry>
     <entry>
       <string>abmsSimulation.ST</string>
       <string>abmsSimulation.ST.style_0.xml</string>
     </entry>
     <entry>
-      <string>abmsSimulation.PD</string>
-      <string>abmsSimulation.PD.style_1.xml</string>
+      <string>abmsSimulation.Story</string>
+      <string>abmsSimulation.Story.style_1.xml</string>
     </entry>
     <entry>
-      <string>abmsSimulation.Story</string>
-      <null/>
+      <string>abmsSimulation.PD</string>
+      <string>abmsSimulation.PD.style_1.xml</string>
     </entry>
   </editedStyles>
   <netStyles>
@@ -41,7 +49,7 @@
       <string>fullnetwork.style_0.xml</string>
     </entry>
   </editedNetStyles>
-  <frequency>ON_NEW</frequency>
+  <frequency>AT_INTERVAL</frequency>
   <schedParams>
     <start>1.0</start>
     <interval>1.0</interval>
@@ -49,23 +57,27 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>1506221147</hashCode>
+    <hashCode>-1935634799</hashCode>
   </schedParams>
-  <layoutClassName>repast.simphony.visualization.visualization2D.Random2DLayout</layoutClassName>
+  <layoutClassName>repast.simphony.visualization.visualization2D.layout.FRLayout2D</layoutClassName>
   <layoutProjection>full network</layoutProjection>
-  <layoutInterval>0</layoutInterval>
+  <layoutInterval>4</layoutInterval>
   <layerOrder>
+    <entry>
+      <string>abmsSimulation.RD</string>
+      <int>0</int>
+    </entry>
     <entry>
       <string>abmsSimulation.ST</string>
       <int>1</int>
     </entry>
     <entry>
-      <string>abmsSimulation.PD</string>
-      <int>2</int>
+      <string>abmsSimulation.Story</string>
+      <int>3</int>
     </entry>
     <entry>
-      <string>abmsSimulation.Story</string>
-      <int>0</int>
+      <string>abmsSimulation.PD</string>
+      <int>2</int>
     </entry>
   </layerOrder>
   <projections>

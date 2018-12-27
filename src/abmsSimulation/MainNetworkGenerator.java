@@ -16,6 +16,7 @@ public abstract class MainNetworkGenerator implements NetworkGenerator<Object> {
 	protected int totalST;
 	protected int totalPD;
 	protected int totalRD;
+	protected int totalStory;
 	
 	
 	public MainNetworkGenerator(Context<Object> context) {
@@ -25,6 +26,15 @@ public abstract class MainNetworkGenerator implements NetworkGenerator<Object> {
 		totalST = 0;
 		totalPD = 0;
 		totalRD = 0;
+		totalStory = 0;
+	}
+	
+	public void setTotalStory(int totalStory) {
+		this.totalStory = totalStory;
+	}
+	
+	public int getTotalStory() {
+		return totalStory;
 	}
 	
 	public void setTotalST(int totalST) {
@@ -104,6 +114,7 @@ public abstract class MainNetworkGenerator implements NetworkGenerator<Object> {
 	 * Initializes the network
 	 * @param p initial wiring probability
 	 */
+	
 	protected void initializeNetwork(double pp) {
 		
 		for (int i = 0; i < 10 && i < totalPD; i++) {
@@ -123,80 +134,73 @@ public abstract class MainNetworkGenerator implements NetworkGenerator<Object> {
 			totalST--;
 		}
 		
-		randomWire(pp);
+		for (int i = 0; i < 10 && i < totalRD; i++) {
+
+			RD p1 = new RD(context, network, SimulBuilder.nextId("R"));
+			context.add(p1);
+			SimulBuilder.rdList.add(p1);
+			totalRD--;
+		}
+		
+		for (int i = 0; i < 10 && i < totalStory; i++) {
+
+			Story p1 = new Story(context, network, SimulBuilder.nextId("T"));
+			context.add(p1);
+			SimulBuilder.storyList.add(p1);
+			totalStory--;
+		}
+		
+//		randomWire(pp);
 	}
 	
-	public void randomWire(double p) {
+	public void randomWire(double pp) {
 		
 		//Initial wiring using a random network
 		for (Object i: network.getNodes()) {
 			for (Object j: network.getNodes()) {
 				double random = RandomHelper.nextDoubleFromTo(0, 1);
-				if (random <= p && !i.equals(j)) {
+				if (random <= pp && !i.equals(j)) {
 					network.addEdge(i, j);
 				}
 			}
 		}
 	}
 	
-
 	
 	public void InitEvolveNetwork() {
 		System.out.println("InitEvolveNetwork()");
 		System.out.println("totlaST : " + totalST);
 		System.out.println("totalPD : " + totalPD);
 		
-		while (totalST > 0 || totalPD > 0) {
+		while (totalST > 0 || totalPD > 0 || totalRD > 0 || totalStory > 0) {
 			
-			double random = RandomHelper.nextDoubleFromTo(0, 1);
+			//double random = RandomHelper.nextDoubleFromTo(0, 1);
 			
 			//Enter ST with less probability than  PD
-			if (totalST > 0 && random <= 0.33) {
-				/*
-				ST e = null;
-				 * int type = RandomHelper.nextIntFromTo(1, 2);
-				
-				if (type == 1 && SimulBuilder.currentST != null && !context.contains(SimulBuilder.currentST)) {
-					e = SimulBuilder.currentST;
-				} else {
-					e = new ST(context, network, SimulBuilder.nextId("S"));
-					//e.generateGoal();
-				}
-				*/
+			//if (totalST > 0 && random <= 0.33) {
+			if(totalST > 0) {
 				ST c = new ST(context, network, SimulBuilder.nextId("S"));
-			
 				SimulBuilder.stList.add(c);
 				attachNode(c);
 				totalST--;
-			} else if (totalPD > 0) {        //  여기서 부터 작업 12월 17일 effectuator  방식으로 처
+			//} else if (totalPD > 0 && random <= 0.53) {       
+			} else if(totalPD > 0) {
 				PD c = new PD(context, network, SimulBuilder.nextId("P"));
 				attachNode(c);
 				SimulBuilder.pdList.add(c);
 				totalPD--;
+			} else if (totalRD > 0) {        
+				RD c = new RD(context, network, SimulBuilder.nextId("R"));
+				attachNode(c);
+				SimulBuilder.rdList.add(c);
+				totalRD--;
+			} else if (totalStory > 0) {        
+				Story c = new Story(context, network, SimulBuilder.nextId("T"));
+				attachNode(c);
+				SimulBuilder.storyList.add(c);
+				totalStory--;
 			}
 		}
-	/*
-		//Assure the presence of the effectuator and/or causator
-		if (SimulBuilder.currentST != null && !context.contains(SimulBuilder.currentST)) {
-			Agent e = null;
-			do {
-				e = (ST)context.getRandomObjects(ST.class, 1).iterator().next();
-				//System.out.println("xxxxxxxxxxxxxxx");
-			} while (e instanceof RD || e instanceof PD);
-			context.remove(e);
-			attachNode(SimulBuilder.currentST);
-		}
-		
-		if (SimulBuilder.currentPD != null && !context.contains(SimulBuilder.currentPD)) {
-			Agent e = null;
-			do {
-				e = (PD)context.getRandomObjects(PD.class, 1).iterator().next();
-				//System.out.println("yyyyyyyyyyyyy");
-			} while (e instanceof ST || e instanceof RD);
-			context.remove(e);
-			attachNode(SimulBuilder.currentPD);
-		}
-		*/
 	}
 	
 	

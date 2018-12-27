@@ -35,6 +35,7 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 		public static ArrayList<ST> stList;
 		public static ArrayList<RD> rdList;
 		public static ArrayList<PD> pdList;
+		public static ArrayList<Story> storyList;
 		
 //		public static ST currentST;
 		//public static EffectuatorRD effectuatorRD;
@@ -53,8 +54,9 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 			
 			stList= new ArrayList<ST>();
 		//	oldDemand = new ArrayList<int[]>();
-			//rdes = new ArrayList<RD>();
+			rdList = new ArrayList<RD>();
 			pdList = new ArrayList<PD>();
+			storyList = new ArrayList<Story>();
 			//staticDemandSteps = 0;
 			
 		//	generateProductElementCosts();
@@ -65,6 +67,7 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 			
 			SimulBuilder.context = context;
 			
+			//make Edges setting
 			buildNetworks();
 			
 			
@@ -79,7 +82,8 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 			
 			networkGenerator.setTotalST(Parameters.numberOfST);
 			networkGenerator.setTotalPD(Parameters.numberOfPD);
-			//networkGenerator.setTotalRD(Parameters.numberOfRD);
+			networkGenerator.setTotalRD(Parameters.numberOfRD);
+			networkGenerator.setTotalStory(Parameters.numberOfStory);
 			networkGenerator.seEdgesPerStep(Parameters.edgesPerStep);
 			networkGenerator.setEdgeProbability(Parameters.edgeProbability);
 			
@@ -94,9 +98,9 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 			
 			scheduleActions();
 			
-			//new TempSchedule(this);
+	
 			
-			context.add(randomEvolve = new TempSchedule(this));
+	//		context.add(randomEvolve = new TempSchedule(this));
 			
 			return context;
 		}
@@ -125,7 +129,7 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 			}
 		}
 
-		// default setting such as color, thickness, 
+		// default setting such as color, thickness,  //make Edges setting
 		private void buildNetworks() {
 			EdgeCreator<CustomNetworkEdge, Object> edgeCreator = new CustomEdgeCreator();		
 			
@@ -279,6 +283,13 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 			return diff;
 		}
 		
+		@ScheduledMethod(start=1,interval=2)
+		public void scheduleMethodTest() {
+			
+			System.out.println("scheduleMethodTest()  in SimulBuilder");
+			
+		}
+		
 		
 		/**
 		 *  Evolves network (if set) during the simulation (adding new nodes randomly)
@@ -325,5 +336,7 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 			parameters = ScheduleParameters.createRepeating(1, Parameters.adaptationSpeed, 3);
 			schedule.scheduleIterable(parameters, st, "doWriting", true);
 			
-			}
+		}
+		
+
 }

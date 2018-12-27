@@ -4,15 +4,13 @@
   <sizeMax>1.0</sizeMax>
   <sizeMin>0.0</sizeMin>
   <sizeScale>1.0</sizeScale>
-  <sizeMethodName>getThickness</sizeMethodName>
+  <sizeMethodName>getThincness</sizeMethodName>
   <color>
     <float>0.0</float>
     <float>0.0</float>
     <float>0.0</float>
   </color>
   <redMethodName>getRed</redMethodName>
-  <greenMethodName>getGreen</greenMethodName>
-  <blueMethodName>getBlue</blueMethodName>
   <colorMax>
     <float>10.0</float>
     <float>10.0</float>

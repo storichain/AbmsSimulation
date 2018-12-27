@@ -64,8 +64,11 @@ public class TempSchedule {
 			for (RepastEdge<Object> edge: SimulBuilder.network.getEdges(attached)) {
 				System.out.println("before chk getEdges(attached) : " + ((CustomNetworkEdge) edge).getColor());
 				System.out.println("before chk getEdges(attached) : " + ((CustomNetworkEdge) edge).getThickness());
-				((CustomNetworkEdge) edge).setThickness(5.0); 
-				((CustomNetworkEdge) edge).setColor(Color.red);
+				((CustomNetworkEdge) edge).setColor(Color.BLUE);
+				((CustomNetworkEdge) edge).setThickness(3.0); 
+				System.out.println("((CustomNetworkEdge) edge).getRed() : " +((CustomNetworkEdge) edge).getRed());
+				System.out.println("((CustomNetworkEdge) edge).getBlue() : " +((CustomNetworkEdge) edge).getBlue());
+	/*			
 				
 				System.out.println(" chk getEdges(attached) : " + ((CustomNetworkEdge) edge).getColor());
 				System.out.println(" chk getEdges(attached) : " + ((CustomNetworkEdge) edge).getThickness());
@@ -92,13 +95,16 @@ public class TempSchedule {
 				System.out.println(" check Color[1] : " + mm.getColor()[1] );
 				System.out.println(" check Color[2] : " + mm.getColor()[2] );
 				
+				System.out.println("linestyle : " + mm.getLineStyle());
 				
-				float[] colorSet = {255,0,0}; 
+				
+				float[] colorSet = {0,0,255}; 
 				mm.setColor(colorSet);
 				
 				System.out.println(" check Color[0] : " + mm.getColor()[0] );
 				System.out.println(" check Color[1] : " + mm.getColor()[1] );
 				System.out.println(" check Color[2] : " + mm.getColor()[2] );
+				*/
 			}
 			
 			

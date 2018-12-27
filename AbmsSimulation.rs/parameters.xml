@@ -7,15 +7,19 @@
 						defaultValue="30" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter" />
-	<parameter name="numberOfPD" displayName="Number of PD" type="int" 
+	<parameter name="numberOfStory" displayName="Default Number of Story" type="int" 
 						defaultValue="10" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter" />
-	<parameter name="numberOfRD" displayName="Number of RD" type="int" 
+	<parameter name="numberOfPD" displayName="Default Number of PD" type="int" 
 						defaultValue="10" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter" />
-	<parameter name="numberOfST" displayName="Number of ST" type="int" 
+	<parameter name="numberOfRD" displayName="Default Number of RD" type="int" 
+						defaultValue="10" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter" />
+	<parameter name="numberOfST" displayName="Default Number of ST" type="int" 
 						defaultValue="10" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter" />
