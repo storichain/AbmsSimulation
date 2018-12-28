@@ -7,7 +7,7 @@ import repast.simphony.context.space.graph.NetworkGenerator;
 import repast.simphony.random.RandomHelper;
 import repast.simphony.space.graph.Network;
 import repast.simphony.space.graph.RepastEdge;
-import repast.simphony.util.collections.IndexedIterable;
+
 
 public class BarabasiAlbertNetworkGenerator extends MainNetworkGenerator implements NetworkGenerator<Object> {
 

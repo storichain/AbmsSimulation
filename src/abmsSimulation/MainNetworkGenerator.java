@@ -114,7 +114,6 @@ public abstract class MainNetworkGenerator implements NetworkGenerator<Object> {
 	 * Initializes the network
 	 * @param p initial wiring probability
 	 */
-	
 	protected void initializeNetwork(double pp) {
 		
 		for (int i = 0; i < 10 && i < totalPD; i++) {
@@ -124,7 +123,6 @@ public abstract class MainNetworkGenerator implements NetworkGenerator<Object> {
 			SimulBuilder.pdList.add(p1);
 			totalPD--;
 		}
-		//randomWire(pp);
 		
 		for (int i = 0; i < 10 && i < totalST; i++) {
 
@@ -144,22 +142,28 @@ public abstract class MainNetworkGenerator implements NetworkGenerator<Object> {
 		
 		for (int i = 0; i < 10 && i < totalStory; i++) {
 
-			Story p1 = new Story(context, network, SimulBuilder.nextId("T"));
-			context.add(p1);
-			SimulBuilder.storyList.add(p1);
+			Story to = new Story(context, network, SimulBuilder.nextId("T"));
+			context.add(to);
+			SimulBuilder.storyList.add(to);
 			totalStory--;
 		}
 		
-//		randomWire(pp);
+		defaultRandomWire(pp);
 	}
 	
-	public void randomWire(double pp) {
+	public void defaultRandomWire(double pp) {
 		
 		//Initial wiring using a random network
 		for (Object i: network.getNodes()) {
+			if(!(i instanceof Story))
+				continue;
 			for (Object j: network.getNodes()) {
+				if(!(j instanceof ST))
+					continue;
 				double random = RandomHelper.nextDoubleFromTo(0, 1);
-				if (random <= pp && !i.equals(j)) {
+				// Only Storytellor can connect with Storeis
+				// random <= pp &&
+				if ( !i.equals(j)  ){
 					network.addEdge(i, j);
 				}
 			}

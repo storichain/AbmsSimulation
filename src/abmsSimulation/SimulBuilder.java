@@ -67,7 +67,7 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 			
 			SimulBuilder.context = context;
 			
-			//make Edges setting
+			//make Edges setting and connect with context and network
 			buildNetworks();
 			
 			
@@ -318,23 +318,24 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 		public void scheduleActions() {
 			ISchedule schedule = repast.simphony.engine.environment.RunEnvironment.getInstance().getCurrentSchedule();
 			
-			ArrayList<PD> pd = new ArrayList<PD>();
-			for (Object c: context.getObjects(PD.class)) {
-				pd.add((PD)c);
-			}
+//			ArrayList<PD> pd = new ArrayList<PD>();
+//			for (Object c: context.getObjects(PD.class)) {
+//				pd.add((PD)c);
+//			}
 															// createRepeating(start,interval,priority)
 			//ScheduleParameters parameters = ScheduleParameters.createRepeating(1, 6 - Parameters.adaptationSpeed, 1);		
 			//schedule.scheduleIterable(parameters, pd, "adaptProductVector", true);
 			ScheduleParameters parameters = ScheduleParameters.createRepeating(2, Parameters.adaptationSpeed, 5);
-			schedule.scheduleIterable(parameters, pd, "doProducing", true);
+			schedule.scheduleIterable(parameters, pdList, "doProducing", true);
 			
-			ArrayList<ST> st = new ArrayList<ST>();
-			for (Object c: context.getObjects(ST.class)) {
-				st.add((ST)c);
-			}
+//			ArrayList<ST> st = new ArrayList<ST>();
+//			for (Object c: context.getObjects(ST.class)) {
+//				st.add((ST)c);
+//			}
+			
 													
-			parameters = ScheduleParameters.createRepeating(1, Parameters.adaptationSpeed, 3);
-			schedule.scheduleIterable(parameters, st, "doWriting", true);
+			//parameters = ScheduleParameters.createRepeating(1, Parameters.adaptationSpeed, 3);
+			//schedule.scheduleIterable(parameters, stList, "doWriting", true);
 			
 		}
 		

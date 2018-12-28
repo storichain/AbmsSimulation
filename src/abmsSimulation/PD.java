@@ -122,18 +122,18 @@ public class PD extends Agent {
 		//setNegotiating(!isNegotiating());
 		//System.out.println("Nego : " + isNegotiating());
 		
-		if (!isOperating()) {
-			Story c;
-			
-			c = (Story) meet(Story.class);
-			
-			if (c!=null && c instanceof Story) {
-				//c.processOffer(goal.getProductVector());
-				// 여기서 투자를 할지 말지 체크하는 기능 넣기  12월23일 24:00
-				double chkAvailableMoney = c.processStaking(demandVector, (availableMoney * 0.1));
-				availableMoney -= chkAvailableMoney;
-			}
-		}
+//		if (!isOperating()) {
+//			Story c;
+//			
+//			c = (Story) meet(Story.class);
+//			
+//			if (c!=null && c instanceof Story) {
+//				//c.processOffer(goal.getProductVector());
+//				// �뿬湲곗꽌 �닾�옄瑜� �븷吏� 留먯� 泥댄겕�븯�뒗 湲곕뒫 �꽔湲�  12�썡23�씪 24:00
+//				double chkAvailableMoney = c.processStaking(demandVector, (availableMoney * 0.1));
+//				availableMoney -= chkAvailableMoney;
+//			}
+//		}
 	}
 	
 }
