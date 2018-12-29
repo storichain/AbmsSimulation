@@ -42,28 +42,31 @@ public class BarabasiAlbertNetworkGenerator extends MainNetworkGenerator impleme
 	public void attachNode(Object n) {	
 		context.add(n);
 
-		//for (int i = 0; i < edgesPerStep; i++) {
+	//	for (int i = 0; i < edgesPerStep; i++) {
 			//Get the total degree (number of edges) for the graph.
 			double totalDegree = network.getDegree();
 			boolean attached = false;
-		//	double prob = 0;
+	
 			int chk = 0;
 		
 			while (!attached) {
 				
 				Object o = null;
 				
-				System.out.println(" getRandomeObjects() : " + context.getRandomObjects(Story.class, SimulBuilder.storyList.size()));
+			//	System.out.println(" getRandomeObjects() : " + context.getRandomObjects(Story.class, SimulBuilder.storyList.size()));
 				for ( Object oIn: context.getRandomObjects(Story.class, SimulBuilder.storyList.size())) {
-					System.out.println(" check Object oINn : " + oIn);
+			//		System.out.println(" check Object oINn : " + oIn);
+				
 					for (Object o1: network.getAdjacent(oIn)) {
-						System.out.println("---------------------- already connected ---------------");
-						break;
+						if(n.equals(o1)) {
+							System.out.println("---------------------- already connected ---------------");
+							break;
+						}
 					}
 					o = oIn;
 				}
 					
-				System.out.println(" check Object : " + o);
+				//System.out.println(" check Object : " + o);
 				double prob = (network.getDegree(o) + 1) / (totalDegree + network.size());
 				
 				if (prob > 0.0 && RandomHelper.nextDoubleFromTo(0,1) <= prob) {

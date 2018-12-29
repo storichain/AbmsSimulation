@@ -147,6 +147,7 @@ public class Agent implements Comparable<Object> {
 	 * @param Class<?> Entity type 
 	 * @return Object An acquaintance
 	 */
+	/*
 	public Object meet(Class<?> type) {		
 		int depth = RandomHelper.nextIntFromTo(1, Parameters.maxDepthForMeeting);
 		
@@ -154,7 +155,9 @@ public class Agent implements Comparable<Object> {
 		Object o = this, acquaintance = this;
 		
 		while (i < depth && o != null) {
-			o = network.getRandomAdjacent(acquaintance);
+			o = network..getRandomAdjacent(acquaintance);
+			//network.
+			// for ( Object oIn: context.getRandomObjects(Story.class, SimulBuilder.storyList.size())) {
 
 			if (o != null && o.getClass() == type && !((Agent)o).isNegotiating()) {
 				acquaintance = o;
@@ -167,5 +170,33 @@ public class Agent implements Comparable<Object> {
 		}
 		
 		return acquaintance;
+	}
+	*/
+	
+	// meet no connection before
+	public Object meet( Object at) {		
+		int depth = RandomHelper.nextIntFromTo(1, Parameters.maxDepthForMeeting);
+		Object o = null;
+
+		for ( Object oIn: context.getRandomObjects(Story.class, SimulBuilder.storyList.size())) {
+				
+			if(network.isAdjacent(at, oIn))
+				continue;
+			
+			
+			o = oIn;
+		}
+/*		
+		for(Object ot : network.getNodes()) {
+			if(!(ot instanceof Story))
+				continue;
+			if(network.isAdjacent(ot, at))
+				continue;
+			System.out.println(ot.toString());
+			o = ot;
+			break;
+		}
+*/		
+		return o;
 	}
 }

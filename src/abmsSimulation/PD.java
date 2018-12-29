@@ -13,7 +13,7 @@ public class PD extends Agent {
 	
 	protected int[] demandVector;		// PD's Demand. when demand matches with ProductDemand on Story, PD does invest.
 	
-	protected boolean isOperating;	    // for checking staking on one time per an activity
+	protected boolean isProducing;	    // for checking staking on one time per an activity
 	public double availableMoney;
 
 	public PD(Context<Object> context, Network<Object> network, String label) {
@@ -21,7 +21,7 @@ public class PD extends Agent {
 		demandVector = new int[Parameters.vectorSpaceSize];
 		initializeDemandVector();
 		initializeAvailableMoney();
-		isOperating = false;
+		isProducing = false;
 		availableMoney = 0;
 	}
 	
@@ -41,13 +41,13 @@ public class PD extends Agent {
 		availableMoney = RandomHelper.nextDoubleFromTo(0, 100);
 	}
 	
-	public boolean isOperating() {
-		return isOperating;
+	public boolean isProducing() {
+		return isProducing;
 	}
 	
-	public void setOperating(boolean isOperating) {
-		this.isOperating = isOperating;
-		if (isOperating) {
+	public void setIsProducing(boolean isProducing) {
+		this.isProducing = isProducing;
+		if (isProducing) {
 			//SimulationBuilder.staticDemandSteps = 0;
 		}
 	}
@@ -121,19 +121,25 @@ public class PD extends Agent {
 		System.out.println("doProducing");
 		//setNegotiating(!isNegotiating());
 		//System.out.println("Nego : " + isNegotiating());
+		setNegotiating(true);
 		
-//		if (!isOperating()) {
-//			Story c;
-//			
-//			c = (Story) meet(Story.class);
-//			
-//			if (c!=null && c instanceof Story) {
-//				//c.processOffer(goal.getProductVector());
-//				// �뿬湲곗꽌 �닾�옄瑜� �븷吏� 留먯� 泥댄겕�븯�뒗 湲곕뒫 �꽔湲�  12�썡23�씪 24:00
-//				double chkAvailableMoney = c.processStaking(demandVector, (availableMoney * 0.1));
-//				availableMoney -= chkAvailableMoney;
-//			}
-//		}
+		if (!isProducing()) {
+			Story c;
+			
+			//c = (Story) meet(Story.class);
+			c = (Story) meet( this);
+			System.out.println("getLabel() : " + c);
+			
+			if (c!=null && c instanceof Story) {
+				//c.processOffer(goal.getProductVector());
+	
+				double chkAvailableMoney = c.processStaking(demandVector, (availableMoney * 0.1));
+				availableMoney -= chkAvailableMoney;
+				
+				network.addEdge(this, c);
+			}
+		}
+		setNegotiating(false);
 	}
 	
 }

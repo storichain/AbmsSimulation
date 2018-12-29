@@ -19,7 +19,8 @@ public class RandomNetworkGenerator extends MainNetworkGenerator {
 		this.network = network;
 		
 		// Evolve network 
-		InitEvolveNetwork();		
+		//InitEvolveNetwork();		
+		
 		
 		RandomDensityGenerator<Object> ng = new RandomDensityGenerator<Object>(density, false, true);
 		

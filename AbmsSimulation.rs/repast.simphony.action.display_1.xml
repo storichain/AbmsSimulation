@@ -4,7 +4,7 @@
   <styles>
     <entry>
       <string>abmsSimulation.RD</string>
-      <string>repast.simphony.visualizationOGL2D.DefaultStyleOGL2D</string>
+      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
     <entry>
       <string>abmsSimulation.ST</string>
@@ -22,7 +22,7 @@
   <editedStyles>
     <entry>
       <string>abmsSimulation.RD</string>
-      <null/>
+      <string>abmsSimulation.RD.style_2.xml</string>
     </entry>
     <entry>
       <string>abmsSimulation.ST</string>
@@ -57,7 +57,7 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>-1935634799</hashCode>
+    <hashCode>2097819261</hashCode>
   </schedParams>
   <layoutClassName>repast.simphony.visualization.visualization2D.layout.FRLayout2D</layoutClassName>
   <layoutProjection>full network</layoutProjection>

@@ -28,6 +28,7 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 
 
 		public static Context<Object> context;
+		public static Context<Object> contextSub;
 		public static Network<Object> network;
 		//public static Network<Object> effectuationNetwork;	
 		public static MainNetworkGenerator networkGenerator;
@@ -101,6 +102,11 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 	
 			
 	//		context.add(randomEvolve = new TempSchedule(this));
+			//context.addProjection(network);
+			context.add(networkGenerator);
+			
+			//context.addSubContext(contextSub);
+			//contextSub.add(networkGenerator);
 			
 			return context;
 		}
@@ -190,7 +196,7 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 			
 			for (Object n: network.getNodes()) {
 				//System.out.println("check Object n : " + n.getClass());
-				if(n instanceof TempSchedule)
+				if(n instanceof MainNetworkGenerator)
 					continue;
 				
 				Agent a = (Agent)n;
@@ -325,7 +331,7 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 															// createRepeating(start,interval,priority)
 			//ScheduleParameters parameters = ScheduleParameters.createRepeating(1, 6 - Parameters.adaptationSpeed, 1);		
 			//schedule.scheduleIterable(parameters, pd, "adaptProductVector", true);
-			ScheduleParameters parameters = ScheduleParameters.createRepeating(2, Parameters.adaptationSpeed, 5);
+			ScheduleParameters parameters = ScheduleParameters.createRepeating(2, Parameters.adaptationSpeed+3, 9);
 			schedule.scheduleIterable(parameters, pdList, "doProducing", true);
 			
 //			ArrayList<ST> st = new ArrayList<ST>();

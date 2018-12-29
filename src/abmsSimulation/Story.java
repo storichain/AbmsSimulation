@@ -65,7 +65,7 @@ public class Story extends Agent {
 	//public int[] processStaking(int[] demandVector) {
 	public double processStaking(int[] demandVector, double availableMoney) {
 
-		setNegotiating(true);
+		//setNegotiating(true);
 		//int[] returnValue = demandVector;
 		boolean chk = false;
 		
@@ -78,7 +78,6 @@ public class Story extends Agent {
 				chk = true;
 				//availableMoney = 0;
 				
-				/// 임시 처
 				//storyCompleted = true;
 			}
 		}
@@ -87,7 +86,7 @@ public class Story extends Agent {
 			availableMoney = 0;
 		}
 		
-		setNegotiating(false);
+		//setNegotiating(false);
 		
 		return availableMoney;
 	}
