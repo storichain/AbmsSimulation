@@ -23,7 +23,7 @@ public class Parameters {
 	public static int adaptationThreshold;
 	public static int adaptationSpeed;
 	// if this parameter is set as true, then entrepreneurs aggregate their product vectors based on the demand of the connected customers network.
-	//public static boolean aggregateProductVector;
+	public static boolean aggregateProductVector;
 	// allows for specifi�룿걆g an utility function (Section 3.1.1) used by the causator (the e�룿�ectuator does not use opportunity cost calculations 2.1.2). The possible options are: none (random), connections utility, degree centrality, betweenness centrality
 	public static String utilityFunction;
 

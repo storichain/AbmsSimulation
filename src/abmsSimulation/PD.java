@@ -22,7 +22,7 @@ public class PD extends Agent {
 		initializeDemandVector();
 		initializeAvailableMoney();
 		isProducing = false;
-		availableMoney = 0;
+		availableMoney = 100;
 	}
 	
 	/**

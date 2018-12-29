@@ -36,7 +36,7 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 		public static ArrayList<ST> stList;
 		public static ArrayList<RD> rdList;
 		public static ArrayList<PD> pdList;
-		public static ArrayList<Story> storyList;
+		//public static ArrayList<Story> storyList;
 		
 //		public static ST currentST;
 		//public static EffectuatorRD effectuatorRD;
@@ -57,7 +57,7 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 		//	oldDemand = new ArrayList<int[]>();
 			rdList = new ArrayList<RD>();
 			pdList = new ArrayList<PD>();
-			storyList = new ArrayList<Story>();
+			//storyList = new ArrayList<Story>();
 			//staticDemandSteps = 0;
 			
 		//	generateProductElementCosts();
@@ -90,7 +90,7 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 			
 			network = networkGenerator.createNetwork(network);
 			
-			initializeDemandVectors();
+	//		initializeDemandVectors();
 	//		aggregateProductVectors();
 			
 			calculateBetweennesCentralities();
@@ -111,6 +111,14 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 			return context;
 		}
 		
+		public static int getStoryListCount() {
+			int count = 0;
+			for(Object o : context.getObjects(Story.class)){
+				count++;
+			}
+			return count;
+		}
+		
 		
 		
 	
@@ -119,21 +127,23 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 		}
 		
 		/**
-		 * Recursively get all customer acquaintances of a node using a specified network depth.
+		 * Recursively get all PD acquaintances of a node using a specified network depth.
 		 * @param n node
 		 * @param depth
-		 * @param List of customers acquaintances
+		 * @param List of PD acquaintances
 		 */
-		public static void getPDAcquiantances(Object n, int depth, List<PD> pdList) {		
+		public static void getPDAcquiantances(Object n, int depth, List<PD> rpdList) {		
 			for (Object o: network.getAdjacent(n)) {
 				if (o instanceof PD) {
-					pdList.add((PD)o);
+					rpdList.add((PD)o);
 				}
 				if (depth > 1) {
-					getPDAcquiantances(o, depth-1, pdList);
+					getPDAcquiantances(o, depth-1, rpdList);
 				}
 			}
 		}
+		
+		
 
 		// default setting such as color, thickness,  //make Edges setting
 		private void buildNetworks() {
@@ -235,21 +245,7 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 
 		
 		
-		/**
-		 * Randomly generate product element costs
-		 */
-		/*
-		private void generateProductElementCosts() {
-			
-			productElementCost = new double[Parameters.vectorSpaceSize];
-			double avgAvailableMoney = (Parameters.minAvailableMoney + Parameters.maxAvailableMoney) / 2.0;
-			
-			for (int i = 0; i < productElementCost.length; i++) {
-				productElementCost[i] = RandomHelper.nextIntFromTo(1, 3) * Parameters.minAvailableMoney;
-				productElementCost[i] = productElementCost[i] > avgAvailableMoney ? avgAvailableMoney : productElementCost[i];
-			}
-		}
-		*/
+		
 		/**
 		 * Returns the "Hamming distance" between two equal length 0-1 vectors
 		 * @param p1
@@ -331,18 +327,45 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 															// createRepeating(start,interval,priority)
 			//ScheduleParameters parameters = ScheduleParameters.createRepeating(1, 6 - Parameters.adaptationSpeed, 1);		
 			//schedule.scheduleIterable(parameters, pd, "adaptProductVector", true);
-			ScheduleParameters parameters = ScheduleParameters.createRepeating(2, Parameters.adaptationSpeed+3, 9);
+			ScheduleParameters parameters = ScheduleParameters.createRepeating(10, Parameters.adaptationSpeed+3, 9);
 			schedule.scheduleIterable(parameters, pdList, "doProducing", true);
 			
-//			ArrayList<ST> st = new ArrayList<ST>();
-//			for (Object c: context.getObjects(ST.class)) {
-//				st.add((ST)c);
-//			}
-			
 													
-			//parameters = ScheduleParameters.createRepeating(1, Parameters.adaptationSpeed, 3);
-			//schedule.scheduleIterable(parameters, stList, "doWriting", true);
+			parameters = ScheduleParameters.createRepeating(2, Parameters.adaptationSpeed+17, 8);
+			schedule.scheduleIterable(parameters, stList, "doWriting", true);
+			parameters = ScheduleParameters.createRepeating(2, Parameters.adaptationSpeed+9, 8);
+			schedule.scheduleIterable(parameters, rdList, "doReaction", true);
 			
+		}
+		
+		/**
+		 * Refine the product vector of the PD based on the
+		 * connected (randomly)
+		 */
+		public void aggregateProductVectors() {
+			
+			if (!Parameters.aggregateProductVector) {
+				return;
+			}
+			
+			double prob = RandomHelper.nextDoubleFromTo(0, 1);
+			
+			for (Object o: context.getObjects(PD.class)) {
+				
+				//Skip causator and effectuator
+				
+//				if (o instanceof Causator || o instanceof Effectuator) {
+//					continue;
+//				}
+				
+				double r = RandomHelper.nextDoubleFromTo(0, 1);
+				
+				if (r >= prob) {
+					//PD e = (PD)o;
+					Story e = (Story)o;
+					e.aggregateProductVector();
+				}
+			}		
 		}
 		
 

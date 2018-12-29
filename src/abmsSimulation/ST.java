@@ -1,17 +1,19 @@
 package abmsSimulation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import repast.simphony.context.Context;
 import repast.simphony.engine.schedule.ScheduledMethod;
 import repast.simphony.space.graph.Network;
+import repast.simphony.util.collections.OpenLongToDoubleHashMap.Iterator;
 
 
 public class ST extends Agent {
 	
 	//protected Story goal;
-	protected List<Story> storyList;
+	public List<Story> storyList;
 	//protected boolean offering;
 	//protected boolean writing;
 
@@ -46,7 +48,9 @@ public class ST extends Agent {
 		
 		Story story = new Story(context,network,storyTitle);
 		storyList.add(story);
-		SimulBuilder.getNetworkGenerator().attachNode(story);
+		//SimulBuilder.getNetworkGenerator().attachNode(story);
+		context.add(story);
+		network.addEdge(this, story);
 	}
 	
 	// for starting new story and continuing stories
@@ -56,20 +60,29 @@ public class ST extends Agent {
 		System.out.println("doWriting()");
 		
 		if (!isNegotiating()) {
-//			Story c;
-//			c = (Story) meet(Story.class);
-//			
-//			if (c!=null && c instanceof Story) {
-//				//c.processOffer(goal.getProductVector());
-//				c.processStaking(demandVector, (availableMoney * 0.1));
-//			}
+
 			if(getStoryList().isEmpty()) {
-				startStory(SimulBuilder.context, SimulBuilder.network, "story title");
+				startStory(SimulBuilder.context, SimulBuilder.network, SimulBuilder.nextId("T"));
 				//attachNode()
 				System.out.println("generate a story");
 				
+			}else if(getStoryList().size() > 10 ){   // Max Story list 10 
+				
+				Collections.shuffle(storyList);
+				for(int i=0; i < storyList.size(); i++) {
+					if(!storyList.get(i).chkStoryCompleted()) {
+						storyList.get(i).aggregateProductVector();
+						break;
+					}
+				}
+			}else {
+				startStory(SimulBuilder.context, SimulBuilder.network, SimulBuilder.nextId("T"));
+				//attachNode()
+				System.out.println("generate a story until Max Story List");
 			}
+		
 		}
+		
 	}
 	
 }

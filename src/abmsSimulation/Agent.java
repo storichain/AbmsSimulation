@@ -178,11 +178,12 @@ public class Agent implements Comparable<Object> {
 		int depth = RandomHelper.nextIntFromTo(1, Parameters.maxDepthForMeeting);
 		Object o = null;
 
-		for ( Object oIn: context.getRandomObjects(Story.class, SimulBuilder.storyList.size())) {
+		for ( Object oIn: context.getRandomObjects(Story.class, SimulBuilder.getStoryListCount())) {
 				
-			if(network.isAdjacent(at, oIn))
+			if(network.isAdjacent(at, oIn)) {
+				System.out.println(" is Adjacent() ");
 				continue;
-			
+			}
 			
 			o = oIn;
 		}

@@ -153,7 +153,7 @@ public abstract class MainNetworkGenerator implements NetworkGenerator<Object> {
 
 			Story to = new Story(context, network, SimulBuilder.nextId("T"));
 			context.add(to);
-			SimulBuilder.storyList.add(to);
+			//SimulBuilder.storyList.add(to);
 		}
 		
 		defaultRandomWire(pp);

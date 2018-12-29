@@ -54,7 +54,7 @@ public class BarabasiAlbertNetworkGenerator extends MainNetworkGenerator impleme
 				Object o = null;
 				
 			//	System.out.println(" getRandomeObjects() : " + context.getRandomObjects(Story.class, SimulBuilder.storyList.size()));
-				for ( Object oIn: context.getRandomObjects(Story.class, SimulBuilder.storyList.size())) {
+				for ( Object oIn: context.getRandomObjects(Story.class, SimulBuilder.getStoryListCount())) {
 			//		System.out.println(" check Object oINn : " + oIn);
 				
 					for (Object o1: network.getAdjacent(oIn)) {
