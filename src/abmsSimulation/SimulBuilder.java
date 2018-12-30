@@ -4,8 +4,11 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 import edu.uci.ics.jung.algorithms.importance.BetweennessCentrality;
+import edu.uci.ics.jung.algorithms.metrics.Metrics;
 import edu.uci.ics.jung.graph.Graph;
 import repast.simphony.context.Context;
 import repast.simphony.context.DefaultContext;
@@ -14,8 +17,6 @@ import repast.simphony.context.space.graph.NetworkBuilder;
 import repast.simphony.engine.schedule.ISchedule;
 import repast.simphony.engine.schedule.ScheduleParameters;
 import repast.simphony.engine.schedule.ScheduledMethod;
-import repast.simphony.engine.watcher.Watch;
-import repast.simphony.engine.watcher.WatcherTriggerSchedule;
 import repast.simphony.random.RandomHelper;
 import repast.simphony.space.graph.EdgeCreator;
 import repast.simphony.space.graph.Network;
@@ -38,13 +39,11 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 		public static ArrayList<PD> pdList;
 		//public static ArrayList<Story> storyList;
 		
-//		public static ST currentST;
-		//public static EffectuatorRD effectuatorRD;
-//		public static PD currentPD;
-		
+
+		public static double ecoPoolMoney;
 		private static HashMap<String, Integer> lastIds;
 		//public static int staticDemandSteps;
-		//public static double[]  productElementCost;   //이상적 상품(스토리)의 cost
+		//public static double[]  productElementCost;   
 		
 		public TempSchedule randomEvolve;
 
@@ -52,6 +51,7 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 		@Override
 		public Context<Object> build(Context<Object> context) {
 			Parameters.initialize();
+			ecoPoolMoney = 1000;
 			
 			stList= new ArrayList<ST>();
 		//	oldDemand = new ArrayList<int[]>();
@@ -59,6 +59,7 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 			pdList = new ArrayList<PD>();
 			//storyList = new ArrayList<Story>();
 			//staticDemandSteps = 0;
+			
 			
 		//	generateProductElementCosts();
 			
@@ -104,6 +105,7 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 	//		context.add(randomEvolve = new TempSchedule(this));
 			//context.addProjection(network);
 			context.add(networkGenerator);
+			context.add(new GrowthSchedule());
 			
 			//context.addSubContext(contextSub);
 			//contextSub.add(networkGenerator);
@@ -119,7 +121,9 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 			return count;
 		}
 		
-		
+		public double getEcoPoolMoney() {
+			return ecoPoolMoney;
+		}
 		
 	
 		public static MainNetworkGenerator getNetworkGenerator() {
@@ -206,7 +210,7 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 			
 			for (Object n: network.getNodes()) {
 				//System.out.println("check Object n : " + n.getClass());
-				if(n instanceof MainNetworkGenerator)
+				if(n instanceof MainNetworkGenerator || n instanceof GrowthSchedule)
 					continue;
 				
 				Agent a = (Agent)n;
@@ -367,6 +371,76 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 				}
 			}		
 		}
+		
+		/**
+		 * Returns the average clustering coefficient of the network 
+		 * (as calculated by Watts and Strogatz)
+		 * @return C
+		 */
+//		public double getClusteringCoefficient() {
+//			double C = 0;
+//			
+//			
+//			Map<Object, Double> cc = Metrics.clusteringCoefficients(((ContextJungNetwork<Object>)network).getGraph());
+//			
+//			for (Object n: network.getNodes()) {
+//				C += cc.get(n) / network.size();
+//			}
+//			
+//			return C;
+//		}
+//		
+//		
+//		/**
+//		 * Returns the effectuator's betweenness centrality in the network
+//		 * @return betweennessCentrality
+//		 */
+//		public double getEffectuatorsBetweennessCentrality() {		 
+//			return effectuator.getBetweennessCentrality();
+//		}
+//
+//		/**
+//		 * Returns the effectuator's degree centrality in the entrepreneurial network
+//		 * @return degreeCentrality
+//		 */	
+//		public double getEffectuatorsDegreeCentrality() {
+//			//Return the normalized effectuators degree centrality
+//			return network.getDegree(effectuator) / (double)(network.size() - 1);		
+//		}	
+//
+//		public String getEffectuatorsGoal() {
+//			return effectuator.getGoal().printProductVector();
+//		}
+//		
+//		public String getCausatorsGoal() {
+//			return causator.getGoal().printProductVector();
+//		}
+//		
+//		public double getEffectuatorsMarketFit() {
+//			int meetDemand = 0;		
+//			
+//			for (int i = 0; i < customers.size(); i++) {
+//				if (hammingDistance(effectuator.getGoal().getProductVector(), 
+//						customers.get(i).getDemandVector()) < Math.ceil(Parameters.vectorSpaceSize / 4.0)) {
+//					meetDemand++;
+//				}
+//			}
+//			
+//			return (meetDemand / (double)customers.size()) * 100.0;
+//		}
+//		
+//		public double getCausatorsMarketFit() {
+//			int meetDemand = 0;		
+//			
+//			for (int i = 0; i < customers.size(); i++) {
+//				if (hammingDistance(causator.getGoal().getProductVector(), 
+//						customers.get(i).getDemandVector()) < Math.ceil(Parameters.vectorSpaceSize / 4.0)) {
+//					meetDemand++;
+//				}
+//			}
+//			
+//			return (meetDemand / (double)customers.size()) * 100.0;
+//		}*/
 		
 
 }

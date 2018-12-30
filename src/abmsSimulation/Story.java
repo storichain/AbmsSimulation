@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
+import java.util.Set;
 
 import repast.simphony.context.Context;
 import repast.simphony.random.RandomHelper;
@@ -13,10 +13,10 @@ import repast.simphony.space.graph.Network;
 
 public class Story extends Agent {
 
-	protected double tomato;
+	//protected double tomato;
 	protected double potato;
-	//public HashMap<PD, Double> tomato;
-	//public String title;
+	public HashMap<Agent, Double> tomato;
+	public int chkKeyPosition;
 	public boolean storyCompleted;
 	private int[] productVector;   // Story's score as Quantity and Quality
 	public int reactionMetric;
@@ -27,16 +27,26 @@ public class Story extends Agent {
 		generateRandomProductVector();
 		storyCompleted = false;
 		//tomato = new HashMap<PD, Double>();
-		tomato = 0;
+		tomato = new HashMap<Agent,Double>();
 		potato = 0;
 		reactionMetric = 0;
+		chkKeyPosition = 0;
 	}
 	
 	public boolean chkStoryCompleted() {
-		if(tomato > 30) {
+		if(totalTomato() > 30) {
 			storyCompleted = true;
 		}
 		return storyCompleted;
+	}
+	
+	public double totalTomato() {
+		double totalAddition = 0;
+		Set<Agent> set = tomato.keySet();
+		for(Agent agent : set){
+			totalAddition += tomato.get(agent);
+		}
+		return totalAddition;
 	}
 	
 	/**
@@ -110,7 +120,7 @@ public class Story extends Agent {
 	 * @param productVector
 	 */
 	//public int[] processStaking(int[] demandVector) {
-	public double processStaking(int[] demandVector, double availableMoney) {
+	public double processStaking(Agent agent, int[] demandVector, double availableMoney) {
 
 		//setNegotiating(true);
 		//int[] returnValue = demandVector;
@@ -121,11 +131,9 @@ public class Story extends Agent {
 		
 		if (d>0 && d <= Math.ceil(Parameters.vectorSpaceSize / 2.0) && r < (Parameters.customersPersuadability / 100.0)) {
 			if(checkAvailableStaking(demandVector)) {
-				tomato += availableMoney;
+				//tomato += availableMoney;
+				tomato.put(agent, availableMoney);
 				chk = true;
-				//availableMoney = 0;
-				
-				//storyCompleted = true;
 			}
 		}
 		

@@ -22,7 +22,8 @@ public class PD extends Agent {
 		initializeDemandVector();
 		initializeAvailableMoney();
 		isProducing = false;
-		availableMoney = 100;
+		availableMoney =  RandomHelper.nextIntFromTo(5, 10);
+		SimulBuilder.ecoPoolMoney -= availableMoney; 
 	}
 	
 	/**
@@ -133,7 +134,7 @@ public class PD extends Agent {
 			if (c!=null && c instanceof Story) {
 				//c.processOffer(goal.getProductVector());
 	
-				double chkAvailableMoney = c.processStaking(demandVector, (availableMoney * 0.1));
+				double chkAvailableMoney = c.processStaking(this, demandVector, (availableMoney * 0.1));
 				availableMoney -= chkAvailableMoney;
 				
 				network.addEdge(this, c);
