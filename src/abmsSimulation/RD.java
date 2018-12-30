@@ -28,6 +28,20 @@ public class RD extends Agent {
 		}
 	}
 	
+	public void doRDaction() {
+		int random = RandomHelper.nextIntFromTo(1, 3);
+		
+		switch(random) {
+			default:
+				doReading();
+				break;
+			case 1:
+				doReaction();
+				break;
+			
+		}
+	}
+	
 	//@ScheduledMethod(start=5,priority=4,interval=7)
 	public void doReaction() {
 		
@@ -35,23 +49,40 @@ public class RD extends Agent {
 		
 		setNegotiating(true);
 		
-		//if (!isProducing()) {
+		if (isNegotiating()) {
 			Story c;
 			
 			//c = (Story) meet(Story.class);
 			c = (Story) meet( this);
-			System.out.println("getLabel() : " + c);
+			//System.out.println("getLabel() : " + c);
 			
 			if (c!=null && c instanceof Story) {
-				//c.processOffer(goal.getProductVector());
-	
-				//double chkAvailableMoney = c.processStaking(demandVector, (availableMoney * 0.1));
-				//availableMoney -= chkAvailableMoney;
-				c.processReaction(demandVector);
-				
-				network.addEdge(this, c);
+				if(c.processReaction(demandVector))
+					network.addEdge(this, c);
 			}
-		//}
+		}
+		setNegotiating(false);
+	}
+	
+	//@ScheduledMethod(start=5,priority=4,interval=7)
+	public void doReading() {
+			
+		System.out.println("doReading()");
+		
+		setNegotiating(true);
+		
+		if (isNegotiating()) {
+			Story c;
+			
+			//c = (Story) meet(Story.class);
+			c = (Story) meet( this);
+			//System.out.println("getLabel() : " + c);
+			
+			if (c!=null && c instanceof Story) {
+				if(c.processReading(demandVector))
+					network.addEdge(this, c);
+			}
+		}
 		setNegotiating(false);
 	}
 

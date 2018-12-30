@@ -21,20 +21,9 @@ public class ST extends Agent {
 		super(context, network, label);
 		
 		storyList = new ArrayList<Story>();
-		//setWriting(false);
-	}
-/*	
-	public void setWriting(boolean writing) {
-		this.writing = writing;
-		if (writing) {
-			//SimulBuilder.staticDemandSteps = 0;
-		}
-	}
 	
-	public boolean isWriting() {
-		return writing;
 	}
-	*/
+
 	
 	public List<Story> getStoryList() {
 		return storyList;

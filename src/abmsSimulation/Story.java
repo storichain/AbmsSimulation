@@ -13,13 +13,15 @@ import repast.simphony.space.graph.Network;
 
 public class Story extends Agent {
 
-	//protected double tomato;
+
 	protected double potato;
-	public HashMap<Agent, Double> tomato;
+	public HashMap<PD, Double> tomato;
 	public int chkKeyPosition;
 	public boolean storyCompleted;
 	private int[] productVector;   // Story's score as Quantity and Quality
 	public int reactionMetric;
+	public int readingMetric;
+	public double tentativeMoney;
 	
 	public Story(Context<Object> context, Network<Object> network, String label) {
 		super(context, network, label);	
@@ -27,14 +29,16 @@ public class Story extends Agent {
 		generateRandomProductVector();
 		storyCompleted = false;
 		//tomato = new HashMap<PD, Double>();
-		tomato = new HashMap<Agent,Double>();
+		tomato = new HashMap<PD,Double>();
 		potato = 0;
 		reactionMetric = 0;
+		readingMetric = 0;
 		chkKeyPosition = 0;
+		tentativeMoney = 0;
 	}
 	
 	public boolean chkStoryCompleted() {
-		if(totalTomato() > 30) {
+		if(totalTomato() > 30 || reactionMetric > 100) {
 			storyCompleted = true;
 		}
 		return storyCompleted;
@@ -42,8 +46,8 @@ public class Story extends Agent {
 	
 	public double totalTomato() {
 		double totalAddition = 0;
-		Set<Agent> set = tomato.keySet();
-		for(Agent agent : set){
+		Set<PD> set = tomato.keySet();
+		for(PD agent : set){
 			totalAddition += tomato.get(agent);
 		}
 		return totalAddition;
@@ -120,7 +124,7 @@ public class Story extends Agent {
 	 * @param productVector
 	 */
 	//public int[] processStaking(int[] demandVector) {
-	public double processStaking(Agent agent, int[] demandVector, double availableMoney) {
+	public double processStaking(PD agent, int[] demandVector, double availableMoney) {
 
 		//setNegotiating(true);
 		//int[] returnValue = demandVector;
@@ -130,7 +134,7 @@ public class Story extends Agent {
 		double r = RandomHelper.nextDoubleFromTo(0, 1);
 		
 		if (d>0 && d <= Math.ceil(Parameters.vectorSpaceSize / 2.0) && r < (Parameters.customersPersuadability / 100.0)) {
-			if(checkAvailableStaking(demandVector)) {
+			if(checkAvailableStakingReaction(demandVector)) {
 				//tomato += availableMoney;
 				tomato.put(agent, availableMoney);
 				chk = true;
@@ -147,7 +151,7 @@ public class Story extends Agent {
 	}
 	
 
-	public boolean checkAvailableStaking(int demandVector[]) {
+	public boolean checkAvailableStakingReaction(int demandVector[]) {
 		double r = RandomHelper.nextDoubleFromTo(0, 1);
 		
 		if (r <= 0.5 && SimulBuilder.hammingDistance(demandVector, productVector) < 3) {
@@ -163,8 +167,24 @@ public class Story extends Agent {
 		double r = RandomHelper.nextDoubleFromTo(0, 1);
 		
 		if (d>0 && d <= Math.ceil(Parameters.vectorSpaceSize / 2.0) && r < (Parameters.customersPersuadability / 100.0)) {
-			if(checkAvailableStaking(demandVector)) {
+			if(checkAvailableStakingReaction(demandVector)) {
 				reactionMetric += 1;
+				chk = true;
+			}
+		}
+		
+		return chk;
+	}
+	
+	public boolean processReading(int[] demandVector) {
+		boolean chk = false;
+		
+		int d = SimulBuilder.hammingDistance(demandVector, productVector);
+		double r = RandomHelper.nextDoubleFromTo(0, 1);
+		
+		if (d>0 && d <= Math.ceil(Parameters.vectorSpaceSize / 2.0) && r < (Parameters.customersPersuadability / 100.0)) {
+			if(checkAvailableStakingReaction(demandVector)) {
+				readingMetric += 1;
 				chk = true;
 			}
 		}

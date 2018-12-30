@@ -129,7 +129,7 @@ public class PD extends Agent {
 			
 			//c = (Story) meet(Story.class);
 			c = (Story) meet( this);
-			System.out.println("getLabel() : " + c);
+			//System.out.println("getLabel() : " + c);
 			
 			if (c!=null && c instanceof Story) {
 				//c.processOffer(goal.getProductVector());

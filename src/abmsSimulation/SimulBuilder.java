@@ -289,37 +289,7 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 			return diff;
 		}
 		
-		@ScheduledMethod(start=1,interval=2)
-		public void scheduleMethodTest() {
-			
-			System.out.println("scheduleMethodTest()  in SimulBuilder");
-			
-		}
 		
-		
-		/**
-		 *  Evolves network (if set) during the simulation (adding new nodes randomly)
-		 */
-		//@ScheduledMethod(start=10,interval=10,priority=10)
-		//@Watch(watcheeClassName="abmsSimulation.Agent",
-		//		watcheeFieldNames="negotiating",whenToTrigger=WatcherTriggerSchedule.IMMEDIATE)
-		
-		
-		/**
-		 * Checks if all entrepreneurs are offering and update the relevant flag
-		  
-		@Watch(watcheeClassName="EffectuationCausation.Entrepreneur",
-				watcheeFieldNames="offering",whenToTrigger=WatcherTriggerSchedule.IMMEDIATE)
-		public void checkAllEntrepreneursOffering() {
-			for (Object o: context.getObjects(Entrepreneur.class)) {
-				if (!((Entrepreneur)o).isOffering()) {
-					allEntrepreneursOffering = false;
-				}
-				return;
-			}
-			allEntrepreneursOffering = true;
-		}
-		*/
 		
 		public void scheduleActions() {
 			ISchedule schedule = repast.simphony.engine.environment.RunEnvironment.getInstance().getCurrentSchedule();
@@ -338,7 +308,7 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 			parameters = ScheduleParameters.createRepeating(2, Parameters.adaptationSpeed+17, 8);
 			schedule.scheduleIterable(parameters, stList, "doWriting", true);
 			parameters = ScheduleParameters.createRepeating(2, Parameters.adaptationSpeed+9, 8);
-			schedule.scheduleIterable(parameters, rdList, "doReaction", true);
+			schedule.scheduleIterable(parameters, rdList, "doRDaction", true);
 			
 		}
 		
@@ -377,20 +347,20 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 		 * (as calculated by Watts and Strogatz)
 		 * @return C
 		 */
-//		public double getClusteringCoefficient() {
-//			double C = 0;
-//			
-//			
-//			Map<Object, Double> cc = Metrics.clusteringCoefficients(((ContextJungNetwork<Object>)network).getGraph());
-//			
-//			for (Object n: network.getNodes()) {
-//				C += cc.get(n) / network.size();
-//			}
-//			
-//			return C;
-//		}
-//		
-//		
+		public double getClusteringCoefficient() {
+			double C = 0;
+			
+			
+			Map<Object, Double> cc = Metrics.clusteringCoefficients(((ContextJungNetwork<Object>)network).getGraph());
+			
+			for (Object n: network.getNodes()) {
+				C += cc.get(n) / network.size();
+			}
+			
+			return C;
+		}
+		
+
 //		/**
 //		 * Returns the effectuator's betweenness centrality in the network
 //		 * @return betweennessCentrality

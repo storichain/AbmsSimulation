@@ -1,6 +1,6 @@
 package abmsSimulation;
 
-import java.awt.Color;
+
 import java.util.Set;
 
 import repast.simphony.engine.schedule.ScheduledMethod;
@@ -15,6 +15,10 @@ public class GrowthSchedule {
 		//this.builder = builder;		
 	}
 	
+	public double getEcoPoolMoney() {
+		return SimulBuilder.ecoPoolMoney;
+	}
+	
 	@ScheduledMethod(priority=1,interval=7,start=7)
 	public void GrowthCheck() {
 		
@@ -26,47 +30,31 @@ public class GrowthSchedule {
 		
 		for ( Object oIn: SimulBuilder.context.getRandomObjects(Story.class, SimulBuilder.getStoryListCount())) {
 			
-			System.out.println(((Story)oIn).chkKeyPosition);
-			
-			double totalAddition = 0;
-			int count = 0;
-			Set<Agent> set = ((Story)oIn).tomato.keySet();
-			for(Agent agent : set){
-				if (count <= ((Story)oIn).chkKeyPosition){
-					count++;
-				}else {
-					totalAddition += ((Story)oIn).tomato.get(agent);
+			//System.out.println(((Story)oIn).chkKeyPosition);
+			//double totalAddition = 0;
+			if(((Story)oIn).chkStoryCompleted()) {
+				Set<PD> set = ((Story)oIn).tomato.keySet();
+				for(PD agent : set){
+					agent.availableMoney += ((Story)oIn).tomato.get(agent) * 2;  // 2 times
+					SimulBuilder.ecoPoolMoney += ((Story)oIn).tomato.get(agent);
 				}
+			}else {
+				((Story)oIn).tentativeMoney = 0;
+				int count = 0;
+				Set<PD> set = ((Story)oIn).tomato.keySet();
+				for(PD agent : set){
+//					if (count <= ((Story)oIn).chkKeyPosition){
+//						count++;
+//					}else {
+//						totalAddition += ((Story)oIn).tomato.get(agent);
+//					}
+					((Story)oIn).tentativeMoney += ((Story)oIn).tomato.get(agent);
+				}
+				//((Story)oIn).chkKeyPosition = set.size();
+				//SimulBuilder.ecoPoolMoney += totalAddition;
 			}
-			((Story)oIn).chkKeyPosition = set.size();
-			SimulBuilder.ecoPoolMoney += totalAddition;
+			
 		}
 		
-//		if (r < Parameters.newConnectionsProbability) {
-//			int random = RandomHelper.nextIntFromTo(1, 5);
-//			
-//			Object attached;
-//			
-//			switch (random) {
-//				default:
-//					PD c = new PD(SimulBuilder.context, SimulBuilder.network, SimulBuilder.nextId("P"));
-//					SimulBuilder.networkGenerator.attachNode((Object)c);
-//					SimulBuilder.pdList.add(c);
-//					attached = c;
-//					break;
-////				case 1:networkGenerator
-////					RD rd = new RD(context, network, nextId("R"));
-////					networkGenerator.attachNode(rd);		
-////					attached = rd;
-////					break;
-//				case 2:
-//					ST e = new ST(SimulBuilder.context, SimulBuilder.network, SimulBuilder.nextId("S"));
-//			//		e.generateGoal();
-//					SimulBuilder.networkGenerator.attachNode(e);
-//					SimulBuilder.stList.add(e);
-//					attached = e;				
-//					break;
-//			}
-//		}
 	}
 }

@@ -181,7 +181,7 @@ public class Agent implements Comparable<Object> {
 		for ( Object oIn: context.getRandomObjects(Story.class, SimulBuilder.getStoryListCount())) {
 				
 			if(network.isAdjacent(at, oIn)) {
-				System.out.println(" is Adjacent() ");
+				//System.out.println(" is Adjacent() ");
 				continue;
 			}
 			
