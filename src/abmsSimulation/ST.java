@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.List;
 
 import repast.simphony.context.Context;
-import repast.simphony.engine.schedule.ScheduledMethod;
 import repast.simphony.random.RandomHelper;
 import repast.simphony.space.graph.Network;
 import repast.simphony.space.graph.RepastEdge;
@@ -35,9 +34,9 @@ public class ST extends Agent {
 		this.storyList = storyList;
 	}
 	
-	public void startStory(Context<Object> context, Network<Object> network, String storyTitle ) {
+	public void startStory(Context<Object> context, Network<Object> network, String storyTitle, int deadlineWeek ) {
 		
-			Story story = new Story(context,network,storyTitle);
+			Story story = new Story(context,network,storyTitle, deadlineWeek);
 			storyList.add(story);
 			//SimulBuilder.getNetworkGenerator().attachNode(story);
 			context.add(story);
@@ -50,16 +49,17 @@ public class ST extends Agent {
 		
 		System.out.println("doWriting()");
 		double coworkingProb = RandomHelper.nextDoubleFromTo(0, 100);
+		int week = RandomHelper.nextIntFromTo(4, 16);
 		
 		if (!isNegotiating()) {
 
-			if(coworkingProb < 0.2) {
+			if(coworkingProb < 10) {
 				ST c;
 				c = (ST) meetCoworker( this);
 				
 				if (c!=null && c instanceof ST) {
 					
-					Story story = new Story(SimulBuilder.context, SimulBuilder.network, SimulBuilder.nextId("T"));
+					Story story = new Story(SimulBuilder.context, SimulBuilder.network, SimulBuilder.nextId("T"), week);
 					storyList.add(story);
 					context.add(story);
 					network.addEdge(this, story);
@@ -74,7 +74,7 @@ public class ST extends Agent {
 					}
 				}
 			}else if(getStoryList().isEmpty()) {
-				startStory(SimulBuilder.context, SimulBuilder.network, SimulBuilder.nextId("T"));
+				startStory(SimulBuilder.context, SimulBuilder.network, SimulBuilder.nextId("T"), week);
 				//attachNode()
 				System.out.println("generate a story");
 				
@@ -88,7 +88,7 @@ public class ST extends Agent {
 					}
 				}
 			}else {
-				startStory(SimulBuilder.context, SimulBuilder.network, SimulBuilder.nextId("T"));
+				startStory(SimulBuilder.context, SimulBuilder.network, SimulBuilder.nextId("T"), week);
 				//attachNode()
 				System.out.println("generate a story until Max Story List");
 			}

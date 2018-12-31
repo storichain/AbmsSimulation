@@ -18,27 +18,38 @@ public class Story extends Agent {
 	public HashMap<PD, Double> tomato;		// earning rate
 	public int chkKeyPosition;
 	public boolean storyCompleted;
+	public boolean settleCompleted;
 	private int[] productVector;   // Story's score as Quantity and Quality
-	public int reactionMetric;
-	public int readingMetric;
+	public int deadlineWeek;
+	public GrowthIndex gi;
+	
 	public double tentativeMoney;
 	
-	public Story(Context<Object> context, Network<Object> network, String label) {
+	
+	public Story(Context<Object> context, Network<Object> network, String label, int week) {
 		super(context, network, label);	
 		productVector = new int[Parameters.vectorSpaceSize];
 		generateRandomProductVector();
 		storyCompleted = false;
+		settleCompleted = false;
 		//tomato = new HashMap<PD, Double>();
 		tomato = new HashMap<PD,Double>();
 		potato = new HashMap<ST,Double>();
-		reactionMetric = 0;
-		readingMetric = 0;
+
 		chkKeyPosition = 0;
 		tentativeMoney = 0;
+		deadlineWeek = week;
+		gi = new GrowthIndex();
 	}
 	
+	// 스토리완성기준
+	// 1. 작가가 완성기간을 설정
+	// 2. 연장싶으면 지금까지 스테이킹한 금액에 1% 스테이킹을 마스터작가 해야 함.
+	
+	
 	public boolean chkStoryCompleted() {
-		if(totalTomato() > 30 || reactionMetric > 100) {
+		double tickCount = repast.simphony.engine.environment.RunEnvironment.getInstance().getCurrentSchedule().getTickCount();		
+		if(tickCount >= (deadlineWeek * 7) ) {
 			storyCompleted = true;
 		}
 		return storyCompleted;
@@ -165,7 +176,7 @@ public class Story extends Agent {
 		
 		if (d>0 && d <= Math.ceil(Parameters.vectorSpaceSize / 2.0) && r < (Parameters.customersPersuadability / 100.0)) {
 			if(checkAvailableStakingReaction(demandVector)) {
-				reactionMetric += 1;
+				gi.reactionMetric += 1;
 				chk = true;
 			}
 		}
@@ -181,7 +192,7 @@ public class Story extends Agent {
 		
 		if (d>0 && d <= Math.ceil(Parameters.vectorSpaceSize / 2.0) && r < (Parameters.customersPersuadability / 100.0)) {
 			if(checkAvailableStakingReaction(demandVector)) {
-				readingMetric += 1;
+				gi.readingMetric += 1;
 				chk = true;
 			}
 		}

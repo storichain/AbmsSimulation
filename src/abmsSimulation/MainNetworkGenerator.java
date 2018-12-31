@@ -150,8 +150,8 @@ public abstract class MainNetworkGenerator implements NetworkGenerator<Object> {
 		}
 		
 		for (int i = 0; i < totalStory; i++) {
-
-			Story to = new Story(context, network, SimulBuilder.nextId("T"));
+			int deadlineWeek = 16;
+			Story to = new Story(context, network, SimulBuilder.nextId("T"), deadlineWeek);
 			context.add(to);
 			//SimulBuilder.storyList.add(to);
 		}

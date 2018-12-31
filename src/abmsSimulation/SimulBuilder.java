@@ -98,14 +98,13 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 			
 			calculateBetweennesCentralities();
 			
-			//allEntrepreneursOffering = false;
 			
 			scheduleActions();
 			
 	
 			
 	//		context.add(randomEvolve = new TempSchedule(this));
-			//context.addProjection(network);
+			
 			context.add(networkGenerator);
 			context.add(new GrowthSchedule());
 			
