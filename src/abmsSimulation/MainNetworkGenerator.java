@@ -177,45 +177,8 @@ public abstract class MainNetworkGenerator implements NetworkGenerator<Object> {
 		}
 	}
 	
-	/*
-	public void InitEvolveNetwork() {
-		System.out.println("InitEvolveNetwork()");
-		System.out.println("totlaST : " + totalST);
-		System.out.println("totalPD : " + totalPD);
 		
-		while (totalST > 0 || totalPD > 0 || totalRD > 0 || totalStory > 0) {
-			
-			//double random = RandomHelper.nextDoubleFromTo(0, 1);
-			
-			//Enter ST with less probability than  PD
-			//if (totalST > 0 && random <= 0.33) {
-			if(totalST > 0) {
-				ST c = new ST(context, network, SimulBuilder.nextId("S"));
-				SimulBuilder.stList.add(c);
-				attachNode(c);
-				totalST--;
-			//} else if (totalPD > 0 && random <= 0.53) {       
-			} else if(totalPD > 0) {
-				PD c = new PD(context, network, SimulBuilder.nextId("P"));
-				attachNode(c);
-				SimulBuilder.pdList.add(c);
-				totalPD--;
-			} else if (totalRD > 0) {        
-				RD c = new RD(context, network, SimulBuilder.nextId("R"));
-				attachNode(c);
-				SimulBuilder.rdList.add(c);
-				totalRD--;
-			} else if (totalStory > 0) {        
-				Story c = new Story(context, network, SimulBuilder.nextId("T"));
-				attachNode(c);
-				SimulBuilder.storyList.add(c);
-				totalStory--;
-			}
-		}
-	}*/
-	
-	
-	@ScheduledMethod(priority=5,interval=2,start=10)
+	@ScheduledMethod(priority=5,interval=3,start=10)
 	public void myEvolveNetwork() {
 		
 		System.out.println("myEvolveNetwork");

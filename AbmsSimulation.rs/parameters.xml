@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <parameters>
+	<parameter name="limitOfMaxStory" displayName="Max Story" type="int" 
+						defaultValue="10" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter" />
 	<parameter name="aggregateProductVector" displayName="Aggregate product vector" type="boolean" 
 						defaultValue="true" 
 						isReadOnly="false" 
@@ -37,10 +41,10 @@
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter" />
 	<parameter name="networkGenerator" displayName="Network generator" type="java.lang.String" 
-						defaultValue="BarabasiAlbert" 
+						defaultValue="AdjacentNetwork" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$StringStringConverter"
-						values="BarabasiAlbert ZombieNetwork RandomNetwork" />
+						values="AdjacentNetwork BarabasiAlbert ZombieNetwork RandomNetwork" />
 	<parameter name="vectorSpaceSize" displayName="Vector space size" type="int" 
 						defaultValue="5" 
 						isReadOnly="false" 

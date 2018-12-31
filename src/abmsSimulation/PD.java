@@ -122,14 +122,13 @@ public class PD extends Agent {
 		System.out.println("doProducing");
 		//setNegotiating(!isNegotiating());
 		//System.out.println("Nego : " + isNegotiating());
-		setNegotiating(true);
-		
-		if (!isProducing()) {
+		if (!isNegotiating()) {
+			
+			setNegotiating(true);
 			Story c;
 			
 			//c = (Story) meet(Story.class);
 			c = (Story) meet( this);
-			//System.out.println("getLabel() : " + c);
 			
 			if (c!=null && c instanceof Story) {
 				//c.processOffer(goal.getProductVector());
@@ -139,8 +138,9 @@ public class PD extends Agent {
 				
 				network.addEdge(this, c);
 			}
+			
+			setNegotiating(false);
 		}
-		setNegotiating(false);
 	}
 	
 }

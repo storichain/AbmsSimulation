@@ -74,7 +74,9 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 			
 			
 			//Network generation
-			if (Parameters.networkGenerator.equals("BarabasiAlbert")) {
+			if (Parameters.networkGenerator.equals("AdjacentNetwork")) {
+				networkGenerator = new BarabasiAlbertNetworkGenerator(context);
+			}else if (Parameters.networkGenerator.equals("BarabasiAlbert")) {
 				networkGenerator = new BarabasiAlbertNetworkGenerator(context);
 			} else if (Parameters.networkGenerator.equals("ZombieNetwork")) {
 				networkGenerator = new ZombieNetworkGenerator(context);
@@ -111,6 +113,24 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 			//contextSub.add(networkGenerator);
 			
 			return context;
+		}
+		
+		public static int getAgentListCount(Object ot) {
+			int count = 0;
+			
+			if(ot instanceof Story) {
+				System.out.println("check Story");
+				for(Object o : context.getObjects(Story.class)){
+					count++;
+				}
+				
+			}else if(ot instanceof ST) {
+				System.out.println("check ST");
+				for(Object o : context.getObjects(ST.class)){
+					count++;
+				}
+			}
+			return count;
 		}
 		
 		public static int getStoryListCount() {

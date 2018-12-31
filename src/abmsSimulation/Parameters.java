@@ -15,6 +15,7 @@ public class Parameters {
 	public static int numberOfST;
 	public static int numberOfRD;
 	public static int numberOfStory;
+	public static int limitOfMaxStory;
 	// this parameters sets the approximate density that should have a network generated with �룿굏he random network model�룿�
 	public static double randomNetworkDensity;
 	// used to con�룿갾ure the customers adaptation behavior. The �룿걊st parameter is adaptation threshold, de�룿걆ed as the percentage of neighbors 

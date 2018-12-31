@@ -14,8 +14,8 @@ import repast.simphony.space.graph.Network;
 public class Story extends Agent {
 
 
-	protected double potato;
-	public HashMap<PD, Double> tomato;
+	public HashMap<ST, Double> potato;		// copyright
+	public HashMap<PD, Double> tomato;		// earning rate
 	public int chkKeyPosition;
 	public boolean storyCompleted;
 	private int[] productVector;   // Story's score as Quantity and Quality
@@ -30,7 +30,7 @@ public class Story extends Agent {
 		storyCompleted = false;
 		//tomato = new HashMap<PD, Double>();
 		tomato = new HashMap<PD,Double>();
-		potato = 0;
+		potato = new HashMap<ST,Double>();
 		reactionMetric = 0;
 		readingMetric = 0;
 		chkKeyPosition = 0;
@@ -126,7 +126,6 @@ public class Story extends Agent {
 	//public int[] processStaking(int[] demandVector) {
 	public double processStaking(PD agent, int[] demandVector, double availableMoney) {
 
-		//setNegotiating(true);
 		//int[] returnValue = demandVector;
 		boolean chk = false;
 		
@@ -144,8 +143,6 @@ public class Story extends Agent {
 		if(!chk) {
 			availableMoney = 0;
 		}
-		
-		//setNegotiating(false);
 		
 		return availableMoney;
 	}

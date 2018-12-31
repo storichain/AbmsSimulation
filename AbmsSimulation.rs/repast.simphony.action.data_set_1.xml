@@ -11,10 +11,20 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>845333603</hashCode>
+    <hashCode>-1030472717</hashCode>
   </scheduleParams>
   <atEnd>false</atEnd>
-  <methodDataSources class="linked-hash-map"/>
+  <methodDataSources class="linked-hash-map">
+    <entry>
+      <string>EcoPoolMoney</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>EcoPoolMoney</id>
+        <className>abmsSimulation.GrowthSchedule</className>
+        <methodName>getEcoPoolMoney</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+  </methodDataSources>
   <countSources class="linked-hash-map"/>
   <customNADataSources class="linked-hash-map"/>
   <customAggDataSources class="linked-hash-map"/>

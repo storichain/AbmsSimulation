@@ -1,13 +1,15 @@
 package abmsSimulation;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import repast.simphony.context.Context;
 import repast.simphony.engine.schedule.ScheduledMethod;
+import repast.simphony.random.RandomHelper;
 import repast.simphony.space.graph.Network;
-import repast.simphony.util.collections.OpenLongToDoubleHashMap.Iterator;
+import repast.simphony.space.graph.RepastEdge;
 
 
 public class ST extends Agent {
@@ -35,11 +37,11 @@ public class ST extends Agent {
 	
 	public void startStory(Context<Object> context, Network<Object> network, String storyTitle ) {
 		
-		Story story = new Story(context,network,storyTitle);
-		storyList.add(story);
-		//SimulBuilder.getNetworkGenerator().attachNode(story);
-		context.add(story);
-		network.addEdge(this, story);
+			Story story = new Story(context,network,storyTitle);
+			storyList.add(story);
+			//SimulBuilder.getNetworkGenerator().attachNode(story);
+			context.add(story);
+			network.addEdge(this, story);
 	}
 	
 	// for starting new story and continuing stories
@@ -47,15 +49,36 @@ public class ST extends Agent {
 	public void doWriting() {
 		
 		System.out.println("doWriting()");
+		double coworkingProb = RandomHelper.nextDoubleFromTo(0, 100);
 		
 		if (!isNegotiating()) {
 
-			if(getStoryList().isEmpty()) {
+			if(coworkingProb < 0.2) {
+				ST c;
+				c = (ST) meetCoworker( this);
+				
+				if (c!=null && c instanceof ST) {
+					
+					Story story = new Story(SimulBuilder.context, SimulBuilder.network, SimulBuilder.nextId("T"));
+					storyList.add(story);
+					context.add(story);
+					network.addEdge(this, story);
+					
+					c.storyList.add(story);
+					network.addEdge(this, c);
+					network.addEdge(c, story);
+					
+					for (RepastEdge<Object> edge: SimulBuilder.network.getEdges(c)) {
+						((CustomNetworkEdge) edge).setColor(Color.blue);
+						((CustomNetworkEdge) edge).setThickness(3.0); 
+					}
+				}
+			}else if(getStoryList().isEmpty()) {
 				startStory(SimulBuilder.context, SimulBuilder.network, SimulBuilder.nextId("T"));
 				//attachNode()
 				System.out.println("generate a story");
 				
-			}else if(getStoryList().size() > 10 ){   // Max Story list 10 
+			}else if(getStoryList().size() >= Parameters.limitOfMaxStory ){   // Max Story list 10 
 				
 				Collections.shuffle(storyList);
 				for(int i=0; i < storyList.size(); i++) {
@@ -69,6 +92,7 @@ public class ST extends Agent {
 				//attachNode()
 				System.out.println("generate a story until Max Story List");
 			}
+			
 		
 		}
 		

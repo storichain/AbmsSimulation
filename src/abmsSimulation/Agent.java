@@ -175,10 +175,11 @@ public class Agent implements Comparable<Object> {
 	
 	// meet no connection before
 	public Object meet( Object at) {		
-		int depth = RandomHelper.nextIntFromTo(1, Parameters.maxDepthForMeeting);
+		//int depth = RandomHelper.nextIntFromTo(1, Parameters.maxDepthForMeeting);
 		Object o = null;
 
 		for ( Object oIn: context.getRandomObjects(Story.class, SimulBuilder.getStoryListCount())) {
+		//for ( Object oIn: context.getRandomObjects(at.getClass(), SimulBuilder.getAgentListCount(at))) {
 				
 			if(network.isAdjacent(at, oIn)) {
 				//System.out.println(" is Adjacent() ");
@@ -186,18 +187,23 @@ public class Agent implements Comparable<Object> {
 			}
 			
 			o = oIn;
-		}
-/*		
+		}	
+		return o;
+	}
+	
+	public Object meetCoworker(Object at) {
+		Object o = null;
 		for(Object ot : network.getNodes()) {
-			if(!(ot instanceof Story))
+			if(!(ot instanceof ST))
 				continue;
-			if(network.isAdjacent(ot, at))
+			//if(network.isAdjacent(ot, at))
+				//continue;
+			if(at.equals(ot))
 				continue;
-			System.out.println(ot.toString());
+			
 			o = ot;
 			break;
 		}
-*/		
 		return o;
 	}
 }
