@@ -1,6 +1,5 @@
 package abmsSimulation;
 
-import java.util.Collections;
 
 import repast.simphony.context.Context;
 import repast.simphony.random.RandomHelper;
@@ -29,7 +28,7 @@ public class RD extends Agent {
 	}
 	
 	public void doRDaction() {
-		int random = RandomHelper.nextIntFromTo(1, 3);
+		int random = RandomHelper.nextIntFromTo(1, 5);
 		
 		switch(random) {
 			default:
@@ -38,7 +37,9 @@ public class RD extends Agent {
 			case 1:
 				doReaction();
 				break;
-			
+			case 2:
+				doShareTip();
+				break;
 		}
 	}
 	
@@ -80,6 +81,27 @@ public class RD extends Agent {
 			
 			if (c!=null && c instanceof Story) {
 				if(c.processReading(demandVector))
+					network.addEdge(this, c);
+			}
+		}
+		setNegotiating(false);
+	}
+	
+	public void doShareTip() {
+		
+		System.out.println("doShareTip()");
+		
+		setNegotiating(true);
+		
+		if (isNegotiating()) {
+			Story c;
+			
+			//c = (Story) meet(Story.class);
+			c = (Story) meet( this);
+			//System.out.println("getLabel() : " + c);
+			
+			if (c!=null && c instanceof Story) {
+				if(c.processShareTip(demandVector))
 					network.addEdge(this, c);
 			}
 		}

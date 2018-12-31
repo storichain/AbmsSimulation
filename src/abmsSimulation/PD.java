@@ -143,4 +143,43 @@ public class PD extends Agent {
 		}
 	}
 	
+	public void doVerify() {
+		
+		//Object o = null;
+		for(Object ot : network.getAdjacent(this)) {
+			if(!(ot instanceof Story))
+				continue;
+			
+			((Story)ot).gi.verifyMetrics += 1;
+			break;
+		}
+	}
+	
+	public void doBranching() {
+		for(Object ot : network.getAdjacent(this)) {
+			if(!(ot instanceof Story))
+				continue;
+			
+			((Story)ot).gi.branchingMetrics += 1;
+			break;
+		}
+	}
+	
+	
+	public void doPDaction() {
+		int random = RandomHelper.nextIntFromTo(1, 5);
+		
+		switch(random) {
+			default:
+				doProducing();
+				break;
+			case 1:
+				doVerify();
+				break;
+			case 2:
+				doBranching();
+				break;
+		}
+	}
+	
 }

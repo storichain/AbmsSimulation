@@ -13,10 +13,8 @@ import repast.simphony.space.graph.RepastEdge;
 
 public class ST extends Agent {
 	
-	//protected Story goal;
 	public List<Story> storyList;
-	//protected boolean offering;
-	//protected boolean writing;
+
 
 	public ST(Context<Object> context, Network<Object> network, String label) {
 		super(context, network, label);
@@ -96,6 +94,33 @@ public class ST extends Agent {
 		
 		}
 		
+	}
+	
+	public void doTyping() {
+		if(storyList.size() == 0)
+			return;
+	
+		int typingStory = RandomHelper.nextIntFromTo(0, storyList.size()-1);
+		//System.out.println("check vale ---------------------  " + typingStory);
+		//System.out.println("check vale storyList.size()---------------------  " + storyList.size()+1);
+		storyList.get(typingStory).gi.typingMetric += 1;
+	}
+	
+	public void doSTaction() {
+		int random = RandomHelper.nextIntFromTo(1, 5);
+		
+		switch(random) {
+			default:
+				doWriting();
+				break;
+			case 1:
+				doTyping();
+				break;
+			case 2:
+				//doShareTip();
+				break;
+			
+		}
 	}
 	
 }

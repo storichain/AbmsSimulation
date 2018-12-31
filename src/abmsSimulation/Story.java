@@ -196,6 +196,21 @@ public class Story extends Agent {
 				chk = true;
 			}
 		}
+		return chk;
+	}
+	
+	public boolean processShareTip(int[] demandVector) {
+		boolean chk = false;
+		
+		int d = SimulBuilder.hammingDistance(demandVector, productVector);
+		double r = RandomHelper.nextDoubleFromTo(0, 1);
+		
+		if (d>0 && d <= Math.ceil(Parameters.vectorSpaceSize / 2.0) && r < (Parameters.customersPersuadability / 100.0)) {
+			if(checkAvailableStakingReaction(demandVector)) {
+				gi.shareTipMetric += 1;
+				chk = true;
+			}
+		}
 		
 		return chk;
 	}

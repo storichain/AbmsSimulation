@@ -266,9 +266,7 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 			return prefix + String.valueOf(nextId);
 		}
 
-		
-		
-		
+				
 		/**
 		 * Returns the "Hamming distance" between two equal length 0-1 vectors
 		 * @param p1
@@ -286,8 +284,7 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 		}
 		
 		public static void printMessage(String m) {
-			ISchedule schedule = repast.simphony.engine.environment.RunEnvironment.getInstance()
-	        .getCurrentSchedule();
+			ISchedule schedule = repast.simphony.engine.environment.RunEnvironment.getInstance().getCurrentSchedule();
 			
 			System.out.println(m + " - " + String.valueOf(schedule.getTickCount()));
 		}
@@ -321,11 +318,10 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 			//ScheduleParameters parameters = ScheduleParameters.createRepeating(1, 6 - Parameters.adaptationSpeed, 1);		
 			//schedule.scheduleIterable(parameters, pd, "adaptProductVector", true);
 			ScheduleParameters parameters = ScheduleParameters.createRepeating(10, Parameters.adaptationSpeed+3, 9);
-			schedule.scheduleIterable(parameters, pdList, "doProducing", true);
-			
-													
+			schedule.scheduleIterable(parameters, pdList, "doPDaction", true);
+								
 			parameters = ScheduleParameters.createRepeating(2, Parameters.adaptationSpeed+17, 8);
-			schedule.scheduleIterable(parameters, stList, "doWriting", true);
+			schedule.scheduleIterable(parameters, stList, "doSTaction", true);
 			parameters = ScheduleParameters.createRepeating(2, Parameters.adaptationSpeed+9, 8);
 			schedule.scheduleIterable(parameters, rdList, "doRDaction", true);
 			

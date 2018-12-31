@@ -56,10 +56,7 @@ public class GrowthSchedule {
 			}
 		});
 		
-		//int chknum = (int) (totalStoryNum * 0.8);
 		System.out.println("thisWeekGI.size()   : " + thisWeekGI.size());
-		//System.out.println("chkNum 8  : " + chknum);
-		//System.out.println("chkNum 2  : " + totalStoryNum * 0.2);
 		for(int i = thisWeekGI.size()-1 ; i >= thisWeekGI.size() * 0.8 ; i--) {
 			System.out.println(thisWeekGI.get(i).gi.getTotalGIsumResult());
 			// Story completed but settlement is not done
