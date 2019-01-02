@@ -21,6 +21,30 @@
   <showLegend>true</showLegend>
   <seriesIds>
     <entry>
+      <string>TotalPDmoney</string>
+      <SeriesData>
+        <label>TotalPDmoney</label>
+        <color>
+          <red>0</red>
+          <green>255</green>
+          <blue>0</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
+    <entry>
+      <string>TotalCirculation</string>
+      <SeriesData>
+        <label>TotalCirculation</label>
+        <color>
+          <red>255</red>
+          <green>0</green>
+          <blue>255</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
+    <entry>
       <string>pdMoney</string>
       <SeriesData>
         <label>pdMoney</label>

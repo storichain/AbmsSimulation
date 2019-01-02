@@ -33,6 +33,24 @@
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
+    <entry>
+      <string>TotalPDmoney</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>TotalPDmoney</id>
+        <className>abmsSimulation.GrowthSchedule</className>
+        <methodName>getTotalPDmoney</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>TotalCirculation</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>TotalCirculation</id>
+        <className>abmsSimulation.GrowthSchedule</className>
+        <methodName>getTotalCirculation</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
   </methodDataSources>
   <countSources class="linked-hash-map"/>
   <customNADataSources class="linked-hash-map"/>

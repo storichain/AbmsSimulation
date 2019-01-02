@@ -23,6 +23,18 @@ public class GrowthSchedule {
 		return SimulBuilder.ecoPoolMoney;
 	}
 	
+	public double getTotalPDmoney() {
+		double total = 0;
+		for(int i=0; i < SimulBuilder.pdList.size(); i++) {
+			total += SimulBuilder.pdList.get(i).availableMoney;
+		}
+		return total;
+	}
+	
+	public double getTotalCirculation() {
+		return getEcoPoolMoney() + getTotalPDmoney();
+	}
+	
 	@ScheduledMethod(priority=1,interval=(7*2),start=7)
 	public void GrowthCheck() {
 		
@@ -31,8 +43,7 @@ public class GrowthSchedule {
 		double r = RandomHelper.nextDoubleFromTo(0, 1);
 		
 		int totalStoryNum = SimulBuilder.getStoryListCount();
-		//double arrGrowth[] = totalStoryNum * 0.1;
-		//HashMap<Story,Integer> thisWeekGI = new HashMap<Story,Integer>();
+		
 		ArrayList<Story> thisWeekGI = new ArrayList<Story>();
 		
 		for ( Object oIn: SimulBuilder.context.getRandomObjects(Story.class, totalStoryNum)) {
@@ -67,6 +78,7 @@ public class GrowthSchedule {
 					SimulBuilder.ecoPoolMoney += thisWeekGI.get(i).tomato.get(at);  // give EcoPool same amount of what they stake
 				}
 				thisWeekGI.get(i).settleCompleted = true;
+				
 			}else { // Story is not done, settlement is not done 
 				thisWeekGI.get(i).tentativeMoney = 0;
 				Set<PD> set = thisWeekGI.get(i).tomato.keySet();

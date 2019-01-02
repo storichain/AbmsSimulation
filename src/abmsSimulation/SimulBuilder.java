@@ -144,6 +144,7 @@ public class SimulBuilder extends DefaultContext<Object> implements ContextBuild
 			return ecoPoolMoney;
 		}
 		
+		
 	
 		public static MainNetworkGenerator getNetworkGenerator() {
 			return networkGenerator;
