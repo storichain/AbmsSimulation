@@ -1,5 +1,5 @@
 <repast.simphony.data2.engine.DataSetDescriptor simphonyVersion="2.6.0">
-  <name>A Data Set</name>
+  <name>Check Total Circulation Of Token</name>
   <type>AGGREGATE</type>
   <inclTick>true</inclTick>
   <inclBatchRun>false</inclBatchRun>
@@ -16,11 +16,20 @@
   <atEnd>false</atEnd>
   <methodDataSources class="linked-hash-map">
     <entry>
-      <string>EcoPoolMoney</string>
+      <string>ecopool</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>EcoPoolMoney</id>
+        <id>ecopool</id>
         <className>abmsSimulation.GrowthSchedule</className>
         <methodName>getEcoPoolMoney</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>pdMoney</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>pdMoney</id>
+        <className>abmsSimulation.PD</className>
+        <methodName>getAvailableMoney</methodName>
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>

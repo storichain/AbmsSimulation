@@ -8,6 +8,7 @@ import repast.simphony.space.graph.Network;
 public class RD extends Agent {
 	
 	protected int[] demandVector;		// RD's Demand. when demand matches with ProductDemand on Story
+	//public GrowthIndex myGIrate;
 
 	public RD(Context<Object> context, Network<Object> network, String label) {
 		super(context, network, label);
@@ -58,7 +59,7 @@ public class RD extends Agent {
 			//System.out.println("getLabel() : " + c);
 			
 			if (c!=null && c instanceof Story) {
-				if(c.processReaction(demandVector))
+				if(c.processReaction(this, demandVector))
 					network.addEdge(this, c);
 			}
 		}
@@ -80,7 +81,7 @@ public class RD extends Agent {
 			//System.out.println("getLabel() : " + c);
 			
 			if (c!=null && c instanceof Story) {
-				if(c.processReading(demandVector))
+				if(c.processReading(this, demandVector))
 					network.addEdge(this, c);
 			}
 		}
@@ -101,7 +102,7 @@ public class RD extends Agent {
 			//System.out.println("getLabel() : " + c);
 			
 			if (c!=null && c instanceof Story) {
-				if(c.processShareTip(demandVector))
+				if(c.processShareTip(this, demandVector))
 					network.addEdge(this, c);
 			}
 		}

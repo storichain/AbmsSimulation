@@ -168,7 +168,7 @@ public class Story extends Agent {
 		return false;
 	}
 	
-	public boolean processReaction(int[] demandVector) {
+	public boolean processReaction(RD ragent, int[] demandVector) {
 		boolean chk = false;
 		
 		int d = SimulBuilder.hammingDistance(demandVector, productVector);
@@ -176,7 +176,16 @@ public class Story extends Agent {
 		
 		if (d>0 && d <= Math.ceil(Parameters.vectorSpaceSize / 2.0) && r < (Parameters.customersPersuadability / 100.0)) {
 			if(checkAvailableStakingReaction(demandVector)) {
-				gi.reactionMetric += 1;
+				//gi.reactionMetrics += 1;
+				int additionMetric = 0;
+				
+				if(gi.reactionMetrics.containsKey(ragent)) {
+					additionMetric = gi.reactionMetrics.get(ragent) + 1;
+					gi.reactionMetrics.put(ragent, additionMetric);
+				}else
+					gi.reactionMetrics.put(ragent, 1);
+				
+				
 				chk = true;
 			}
 		}
@@ -184,7 +193,7 @@ public class Story extends Agent {
 		return chk;
 	}
 	
-	public boolean processReading(int[] demandVector) {
+	public boolean processReading(RD ragent, int[] demandVector) {
 		boolean chk = false;
 		
 		int d = SimulBuilder.hammingDistance(demandVector, productVector);
@@ -192,14 +201,22 @@ public class Story extends Agent {
 		
 		if (d>0 && d <= Math.ceil(Parameters.vectorSpaceSize / 2.0) && r < (Parameters.customersPersuadability / 100.0)) {
 			if(checkAvailableStakingReaction(demandVector)) {
-				gi.readingMetric += 1;
+				//gi.readingMetrics += 1;
+				int additionMetric = 0;
+				
+				if(gi.readingMetrics.containsKey(ragent)) {
+					additionMetric = gi.readingMetrics.get(ragent) + 1;
+					gi.readingMetrics.put(ragent, additionMetric);
+				}else
+					gi.readingMetrics.put(ragent, 1);
+				
 				chk = true;
 			}
 		}
 		return chk;
 	}
 	
-	public boolean processShareTip(int[] demandVector) {
+	public boolean processShareTip(RD ragent, int[] demandVector) {
 		boolean chk = false;
 		
 		int d = SimulBuilder.hammingDistance(demandVector, productVector);
@@ -207,7 +224,15 @@ public class Story extends Agent {
 		
 		if (d>0 && d <= Math.ceil(Parameters.vectorSpaceSize / 2.0) && r < (Parameters.customersPersuadability / 100.0)) {
 			if(checkAvailableStakingReaction(demandVector)) {
-				gi.shareTipMetric += 1;
+				//gi.shareTipMetrics += 1;	
+				int additionMetric = 0;
+				
+				if(gi.shareTipMetrics.containsKey(ragent)) {
+					additionMetric = gi.shareTipMetrics.get(ragent) + 1;
+					gi.shareTipMetrics.put(ragent, additionMetric);
+				}else
+					gi.shareTipMetrics.put(ragent, 1);
+				
 				chk = true;
 			}
 		}

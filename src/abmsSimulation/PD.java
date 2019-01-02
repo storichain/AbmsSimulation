@@ -15,6 +15,7 @@ public class PD extends Agent {
 	
 	protected boolean isProducing;	    // for checking staking on one time per an activity
 	public double availableMoney;
+	//public GrowthIndex myGIrate;
 
 	public PD(Context<Object> context, Network<Object> network, String label) {
 		super(context, network, label);
@@ -22,8 +23,7 @@ public class PD extends Agent {
 		initializeDemandVector();
 		initializeAvailableMoney();
 		isProducing = false;
-		availableMoney =  RandomHelper.nextIntFromTo(5, 10);
-		SimulBuilder.ecoPoolMoney -= availableMoney; 
+		 
 	}
 	
 	/**
@@ -39,7 +39,13 @@ public class PD extends Agent {
 	}
 	
 	public void initializeAvailableMoney() {
-		availableMoney = RandomHelper.nextDoubleFromTo(0, 100);
+		//availableMoney = RandomHelper.nextDoubleFromTo(0, 100);
+		availableMoney =  RandomHelper.nextIntFromTo(5, 10);
+		SimulBuilder.ecoPoolMoney -= availableMoney;
+	}
+	
+	public double getAvailableMoney() {
+		return  availableMoney;
 	}
 	
 	public boolean isProducing() {
@@ -98,24 +104,7 @@ public class PD extends Agent {
 			}
 		}
 	}
-/*	
-	// demand comparison
-	//public void processOffer(int[] productVector) {
-	public void processDemandComparison(int[] productVector) {
 
-		setNegotiating(true);
-		
-		int d = SimulBuilder.hammingDistance(demandVector, productVector);
-		
-		double r = RandomHelper.nextDoubleFromTo(0, 1);
-		
-		if (d>0 && d <= Math.ceil(Parameters.vectorSpaceSize / 2.0) && r < (Parameters.customersPersuadability / 100.0)) {
-			demandVector = productVector;
-		}
-		
-		setNegotiating(false);
-	}
-*/	
 	
 	//@ScheduledMethod(start=5,priority=4,interval=7)
 	public void doProducing() {
@@ -145,22 +134,35 @@ public class PD extends Agent {
 	
 	public void doVerify() {
 		
-		//Object o = null;
+		int additionMetric = 0;
 		for(Object ot : network.getAdjacent(this)) {
 			if(!(ot instanceof Story))
 				continue;
 			
-			((Story)ot).gi.verifyMetrics += 1;
+			//((Story)ot).gi.verifyMetrics. += 1;
+			
+			if(((Story)ot).gi.verifyMetrics.containsKey(this)) {
+				additionMetric = ((Story)ot).gi.verifyMetrics.get(this) + 1;
+				((Story)ot).gi.verifyMetrics.put(this, additionMetric);
+			}else
+				((Story)ot).gi.verifyMetrics.put(this, 1);
+			
 			break;
 		}
 	}
 	
 	public void doBranching() {
+		int additionMetric = 0;
 		for(Object ot : network.getAdjacent(this)) {
 			if(!(ot instanceof Story))
 				continue;
 			
-			((Story)ot).gi.branchingMetrics += 1;
+			if(((Story)ot).gi.branchingMetrics.containsKey(this)) {
+				additionMetric = ((Story)ot).gi.branchingMetrics.get(this) + 1;
+				((Story)ot).gi.branchingMetrics.put(this, additionMetric);
+			}else
+				((Story)ot).gi.branchingMetrics.put(this, 1);
+			
 			break;
 		}
 	}

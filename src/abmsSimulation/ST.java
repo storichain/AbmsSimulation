@@ -14,6 +14,7 @@ import repast.simphony.space.graph.RepastEdge;
 public class ST extends Agent {
 	
 	public List<Story> storyList;
+	//public GrowthIndex myGIrate;
 
 
 	public ST(Context<Object> context, Network<Object> network, String label) {
@@ -91,7 +92,6 @@ public class ST extends Agent {
 				System.out.println("generate a story until Max Story List");
 			}
 			
-		
 		}
 		
 	}
@@ -101,23 +101,47 @@ public class ST extends Agent {
 			return;
 	
 		int typingStory = RandomHelper.nextIntFromTo(0, storyList.size()-1);
-		//System.out.println("check vale ---------------------  " + typingStory);
-		//System.out.println("check vale storyList.size()---------------------  " + storyList.size()+1);
-		storyList.get(typingStory).gi.typingMetric += 1;
+		if(typingStory != 0) {
+			//storyList.get(typingStory).gi.typingMetrics += 1;
+			int additionMetric = 0;
+			if(storyList.get(typingStory).gi.sceneMetrics.containsKey(this)) {
+				additionMetric = storyList.get(typingStory).gi.sceneMetrics.get(this) + 1;
+				storyList.get(typingStory).gi.sceneMetrics.put(this, additionMetric);
+			}else
+				storyList.get(typingStory).gi.sceneMetrics.put(this, 1);
+		}
+	}
+	
+	public void doCreateScene() {
+		if(storyList.size() == 0)
+			return;
+	
+		int sceneCreation = RandomHelper.nextIntFromTo(0, storyList.size()-1);
+		
+		if(sceneCreation != 0) {
+			int additionMetric = 0;
+			if(storyList.get(sceneCreation).gi.sceneMetrics.containsKey(this)) {
+				additionMetric = storyList.get(sceneCreation).gi.sceneMetrics.get(this) + 1;
+				storyList.get(sceneCreation).gi.sceneMetrics.put(this, additionMetric);
+			}else
+				storyList.get(sceneCreation).gi.sceneMetrics.put(this, 1);
+		}
 	}
 	
 	public void doSTaction() {
 		int random = RandomHelper.nextIntFromTo(1, 5);
 		
 		switch(random) {
-			default:
+			case 1:
 				doWriting();
 				break;
-			case 1:
+			case 2:
 				doTyping();
 				break;
-			case 2:
-				//doShareTip();
+			case 3:
+				doCreateScene();
+				break;
+			default:
 				break;
 			
 		}
