@@ -865,3 +865,24 @@ Caused by: java.lang.IndexOutOfBoundsException: Index: 19, Size: 19
 	at java.util.ArrayList.get(ArrayList.java:429)
 	at abmsSimulation.GrowthSchedule.GrowthCheck(GrowthSchedule.java:57)
 	... 10 more
+FATAL [Thread-6] 2019-01-04 17:08:18,158 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (119.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at abmsSimulation.GrowthSchedule$$FastClassByCGLIB$$7e24709e.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.util.ConcurrentModificationException
+	at java.util.HashMap$HashIterator.nextNode(HashMap.java:1429)
+	at java.util.HashMap$KeyIterator.next(HashMap.java:1453)
+	at abmsSimulation.GrowthSchedule.GrowthCheck(GrowthSchedule.java:77)
+	... 10 more

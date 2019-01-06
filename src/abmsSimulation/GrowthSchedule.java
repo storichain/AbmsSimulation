@@ -45,6 +45,7 @@ public class GrowthSchedule {
 		int totalStoryNum = SimulBuilder.getStoryListCount();
 		
 		ArrayList<Story> thisWeekGI = new ArrayList<Story>();
+		thisWeekGI.clear();
 		
 		for ( Object oIn: SimulBuilder.context.getRandomObjects(Story.class, totalStoryNum)) {
 			
@@ -74,8 +75,15 @@ public class GrowthSchedule {
 			if(thisWeekGI.get(i).chkStoryCompleted() && !thisWeekGI.get(i).settleCompleted ) {
 				Set<PD> set = thisWeekGI.get(i).tomato.keySet();
 				for(PD at : set){
+					System.out.println("---------  before ------------- ");
+					System.out.println("each availableMoney : " + at.availableMoney);
+					System.out.println("same value of thisWeekGI : " + thisWeekGI.get(i).tomato.get(at));
 					at.availableMoney += thisWeekGI.get(i).tomato.get(at) * 0.1;  // give 10% of the amount of what they stake
-					SimulBuilder.ecoPoolMoney += thisWeekGI.get(i).tomato.get(at);  // give EcoPool same amount of what they stake
+					System.out.println("---------  after ------------- ");
+					System.out.println("each availableMoney : " + at.availableMoney);
+					//System.out.println("same value of thisWeekGI : " + thisWeekGI.get(i).tomato.get(at));
+					SimulBuilder.ecoPoolMoney += at.availableMoney;
+					thisWeekGI.get(i).tomato.put(at, (double) 0);
 				}
 				thisWeekGI.get(i).settleCompleted = true;
 				
